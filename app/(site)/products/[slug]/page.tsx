@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   return {
-    title: `${product.name} | Express Foods`,
+    title: product.name,
     description: product.description,
     openGraph: {
       title: `${product.name} — Premium Egyptian Produce`,
@@ -56,12 +56,14 @@ export default async function ProductDetailPage({ params }: Props) {
     <>
       <script
         type="application/ld+json"
+        suppressHydrationWarning
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(getProductJsonLd(product)),
         }}
       />
       <script
         type="application/ld+json"
+        suppressHydrationWarning
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(getBreadcrumbJsonLd(breadcrumbItems)),
         }}

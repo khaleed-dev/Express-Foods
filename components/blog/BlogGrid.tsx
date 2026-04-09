@@ -28,6 +28,7 @@ export function BlogGrid({ posts }: BlogGridProps) {
                   src={post.image}
                   alt={post.title}
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   className="absolute inset-0 size-full object-cover transition-transform duration-300 hover:scale-105"
                 />
               </Link>

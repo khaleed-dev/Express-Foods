@@ -35,7 +35,7 @@ export function PageHero({
             {tagline}
           </p>
         )}
-        <h1 className="mb-5 text-6xl font-bold text-text-alternative md:mb-6 md:text-9xl lg:text-10xl">
+        <h1 className="mb-5 font-serif text-4xl font-bold text-text-alternative md:mb-6 md:text-5xl lg:text-6xl">
           {heading}
         </h1>
         {description && (
@@ -63,6 +63,7 @@ export function PageHero({
           src={backgroundImage}
           alt={heading}
           fill
+          sizes="100vw"
           className="object-cover"
           priority
         />

@@ -23,7 +23,7 @@ export function Stats() {
         <div className="mb-12 grid grid-cols-1 gap-y-5 md:mb-18 md:grid-cols-2 md:gap-x-12 lg:mb-20 lg:gap-x-20">
           <div>
             <p className="mb-3 font-semibold md:mb-4">Scale</p>
-            <h2 className="text-5xl font-bold md:text-7xl lg:text-8xl">
+            <h2 className="text-5xl font-bold md:text-4xl lg:text-5xl">
               By the numbers
             </h2>
           </div>
@@ -70,7 +70,7 @@ export function Stats() {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {/* First stat (spans 2 rows on large screens) */}
           <div className="flex flex-col justify-center border border-border-primary p-8 text-center md:col-span-2 md:row-span-1 lg:col-span-1 lg:row-span-2">
-            <p className="mb-2 text-10xl font-bold leading-[1.3] md:text-[4rem] lg:text-[5rem]">
+            <p className="mb-2 text-5xl font-bold leading-[1.3] md:text-[4rem] lg:text-[5rem]">
               {stats[0].value}
             </p>
             <h3 className="text-md font-bold leading-[1.4] md:text-xl">
@@ -91,7 +91,7 @@ export function Stats() {
 
           {/* Second stat */}
           <div className="flex flex-col justify-center border border-border-primary p-8 text-center">
-            <p className="mb-2 text-10xl font-bold leading-[1.3] md:text-[4rem] lg:text-[5rem]">
+            <p className="mb-2 text-5xl font-bold leading-[1.3] md:text-[4rem] lg:text-[5rem]">
               {stats[1].value}
             </p>
             <h3 className="text-md font-bold leading-[1.4] md:text-xl">
@@ -101,7 +101,7 @@ export function Stats() {
 
           {/* Third stat */}
           <div className="flex flex-col justify-center border border-border-primary p-8 text-center">
-            <p className="mb-2 text-10xl font-bold leading-[1.3] md:text-[4rem] lg:text-[5rem]">
+            <p className="mb-2 text-5xl font-bold leading-[1.3] md:text-[4rem] lg:text-[5rem]">
               {stats[2].value}
             </p>
             <h3 className="text-md font-bold leading-[1.4] md:text-xl">
@@ -122,7 +122,7 @@ export function Stats() {
 
           {/* Fourth stat */}
           <div className="flex flex-col justify-center border border-border-primary p-8 text-center">
-            <p className="mb-2 text-10xl font-bold leading-[1.3] md:text-[4rem] lg:text-[5rem]">
+            <p className="mb-2 text-5xl font-bold leading-[1.3] md:text-[4rem] lg:text-[5rem]">
               {stats[3].value}
             </p>
             <h3 className="text-md font-bold leading-[1.4] md:text-xl">

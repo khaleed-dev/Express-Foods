@@ -35,7 +35,7 @@ export function ProductRange() {
         <div className="flex flex-col items-start">
           <div className="mx-auto mb-12 w-full max-w-lg items-start justify-between gap-5 md:mb-18 lg:mb-20">
             <p className="mb-3 text-center font-semibold md:mb-4">Range</p>
-            <h2 className="mb-5 text-center text-5xl font-bold md:mb-6 md:text-7xl lg:text-8xl">
+            <h2 className="mb-5 text-center text-5xl font-bold md:mb-6 md:text-4xl lg:text-5xl">
               What we grow and ship
             </h2>
             <p className="text-center md:text-md">

@@ -43,7 +43,7 @@ export default function SiteLayout({
   return (
     <html
       lang="en"
-      className={`${montserrat.variable} ${merriweather.variable} ${sourceCodePro.variable} h-full antialiased`}
+      className={`${montserrat.variable} ${merriweather.variable} ${sourceCodePro.variable} min-h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">
         <Navbar />

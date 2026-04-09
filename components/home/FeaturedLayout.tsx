@@ -110,7 +110,7 @@ export function FeaturedLayout() {
           <div className="w-full md:w-1/2 md:pr-6 lg:pr-10">
             <div className="mb-8 md:hidden">
               <p className="mb-3 font-semibold md:mb-4">Origin</p>
-              <h2 className="mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-8xl">
+              <h2 className="mb-5 text-5xl font-bold md:mb-6 md:text-4xl lg:text-5xl">
                 Egypt&apos;s climate works for you
               </h2>
               <p className="md:text-md">
@@ -133,7 +133,7 @@ export function FeaturedLayout() {
           <div className="w-full md:w-1/2 md:pl-6 lg:pl-10">
             <div className="mb-8 hidden md:block">
               <p className="mb-3 font-semibold md:mb-4">Origin</p>
-              <h2 className="mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-8xl">
+              <h2 className="mb-5 text-5xl font-bold md:mb-6 md:text-4xl lg:text-5xl">
                 Egypt&apos;s climate works for you
               </h2>
               <p className="md:text-md">

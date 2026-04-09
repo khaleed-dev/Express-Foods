@@ -136,6 +136,30 @@ export function ProductHeader({ product }: ProductHeaderProps) {
                           <td className="py-2">{spec.value}</td>
                         </tr>
                       ))}
+                      {!product.specs.some((s) => s.label === "Season") && (
+                        <tr className="border-b border-border-primary last:border-0">
+                          <td className="py-2 pr-4 font-medium text-text-primary/70">
+                            Season
+                          </td>
+                          <td className="py-2">{product.season}</td>
+                        </tr>
+                      )}
+                      {!product.specs.some((s) => s.label === "Shelf life") && (
+                        <tr className="border-b border-border-primary last:border-0">
+                          <td className="py-2 pr-4 font-medium text-text-primary/70">
+                            Shelf Life
+                          </td>
+                          <td className="py-2">{product.shelfLife}</td>
+                        </tr>
+                      )}
+                      {!product.specs.some((s) => s.label === "Storage temp") && (
+                        <tr className="border-b border-border-primary last:border-0">
+                          <td className="py-2 pr-4 font-medium text-text-primary/70">
+                            Storage Temperature
+                          </td>
+                          <td className="py-2">{product.storageTemp}</td>
+                        </tr>
+                      )}
                     </tbody>
                   </table>
                 </AccordionContent>
@@ -158,6 +182,11 @@ export function ProductHeader({ product }: ProductHeaderProps) {
                   <p className="mt-3 text-sm text-text-primary/70">
                     Pack types: {product.packTypes.join(", ")}
                   </p>
+                  {product.calibers && product.calibers.length > 0 && (
+                    <p className="mt-2 text-sm text-text-primary/70">
+                      Calibers: {product.calibers.join(", ")}
+                    </p>
+                  )}
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="certifications">
@@ -170,30 +199,27 @@ export function ProductHeader({ product }: ProductHeaderProps) {
                   Certifications &amp; Markets
                 </AccordionTrigger>
                 <AccordionContent className="md:pb-6">
-                  <div className="space-y-3 text-sm">
+                  <div className="space-y-4 text-sm">
                     <div>
-                      <p className="font-medium text-text-primary/70">
+                      <p className="mb-2 font-medium text-text-primary/70">
                         Certifications
                       </p>
-                      <p>{product.certifications.join(", ")}</p>
+                      <div className="flex flex-wrap gap-2">
+                        {product.certifications.map((cert, i) => (
+                          <span
+                            key={i}
+                            className="inline-block rounded-full bg-background-secondary px-3 py-1 text-xs font-medium"
+                          >
+                            {cert}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                     <div>
                       <p className="font-medium text-text-primary/70">
                         Target Markets
                       </p>
                       <p>{product.targetMarkets.join(", ")}</p>
-                    </div>
-                    <div>
-                      <p className="font-medium text-text-primary/70">
-                        Storage Temperature
-                      </p>
-                      <p>{product.storageTemp}</p>
-                    </div>
-                    <div>
-                      <p className="font-medium text-text-primary/70">
-                        Shelf Life
-                      </p>
-                      <p>{product.shelfLife}</p>
                     </div>
                   </div>
                 </AccordionContent>

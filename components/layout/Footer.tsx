@@ -35,10 +35,10 @@ export function Footer() {
               </p>
               <p className="mb-1 text-sm font-semibold">Contact</p>
               <a
-                href="tel:+2021234567"
+                href="tel:+20222456789"
                 className="block text-sm underline decoration-black underline-offset-1"
               >
-                +20 2 XXXX XXXX
+                +20 2 2345 6789
               </a>
               <a
                 href="mailto:info@expressfoods.com"
@@ -48,19 +48,19 @@ export function Footer() {
               </a>
             </div>
             <div className="grid grid-flow-col grid-cols-[max-content] items-start justify-start gap-x-3">
-              <a href="#" aria-label="Facebook">
+              <a href="#" aria-label="Facebook" rel="noopener noreferrer" target="_blank">
                 <BiLogoFacebookCircle className="size-6" />
               </a>
-              <a href="#" aria-label="Instagram">
+              <a href="#" aria-label="Instagram" rel="noopener noreferrer" target="_blank">
                 <BiLogoInstagram className="size-6" />
               </a>
-              <a href="#" aria-label="X (Twitter)">
+              <a href="#" aria-label="X (Twitter)" rel="noopener noreferrer" target="_blank">
                 <FaXTwitter className="size-6 p-0.5" />
               </a>
-              <a href="#" aria-label="LinkedIn">
+              <a href="#" aria-label="LinkedIn" rel="noopener noreferrer" target="_blank">
                 <BiLogoLinkedinSquare className="size-6" />
               </a>
-              <a href="#" aria-label="YouTube">
+              <a href="#" aria-label="YouTube" rel="noopener noreferrer" target="_blank">
                 <BiLogoYoutube className="size-6" />
               </a>
             </div>
@@ -72,9 +72,6 @@ export function Footer() {
               </li>
               <li className="py-2 text-sm font-semibold">
                 <Link href="/products">Products</Link>
-              </li>
-              <li className="py-2 text-sm font-semibold">
-                <Link href="/about">Quality</Link>
               </li>
               <li className="py-2 text-sm font-semibold">
                 <Link href="/about">Export process</Link>
@@ -95,9 +92,6 @@ export function Footer() {
               </li>
               <li className="py-2 text-sm font-semibold">
                 <Link href="/contact">Contact</Link>
-              </li>
-              <li className="py-2 text-sm font-semibold">
-                <Link href="/contact">FAQ</Link>
               </li>
             </ul>
           </div>

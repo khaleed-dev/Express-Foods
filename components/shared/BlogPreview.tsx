@@ -65,7 +65,7 @@ export function BlogPreview({
         <div className="mb-12 md:mb-18 lg:mb-20">
           <div className="w-full max-w-lg">
             <p className="mb-3 font-semibold md:mb-4">{tagline}</p>
-            <h2 className="mb-5 text-6xl font-bold md:mb-6 md:text-9xl lg:text-10xl">
+            <h2 className="mb-5 font-serif text-3xl font-bold md:mb-6 md:text-6xl lg:text-7xl">
               {heading}
             </h2>
             <p className="md:text-md">{description}</p>

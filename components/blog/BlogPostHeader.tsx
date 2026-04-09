@@ -44,7 +44,7 @@ export function BlogPostHeader({ post }: BlogPostHeaderProps) {
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
-          <h1 className="mb-8 text-5xl font-bold md:mb-10 md:text-7xl lg:mb-12 lg:text-8xl">
+          <h1 className="mb-8 text-5xl font-bold md:mb-10 md:text-4xl lg:mb-12 lg:text-5xl">
             {post.title}
           </h1>
           <div className="flex w-full flex-col items-start justify-between sm:flex-row sm:items-end">

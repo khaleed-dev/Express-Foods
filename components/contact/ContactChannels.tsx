@@ -27,8 +27,8 @@ const channels = [
     title: "Phone",
     description: "Speak directly with our commercial team about your needs.",
     link: {
-      label: "+20 2 XXXX XXXX",
-      href: "tel:+2020000000",
+      label: "+20 2 2345 6789",
+      href: "tel:+20222456789",
     },
   },
   {
@@ -48,7 +48,7 @@ export function ContactChannels() {
       <div className="container">
         <div className="mb-12 max-w-lg md:mb-18 lg:mb-20">
           <p className="mb-3 font-semibold md:mb-4">Reach</p>
-          <h2 className="mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-8xl">
+          <h2 className="mb-5 text-5xl font-bold md:mb-6 md:text-4xl lg:text-5xl">
             Multiple ways
           </h2>
           <p className="md:text-md">

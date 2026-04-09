@@ -2,5 +2,5 @@
 module.exports = {
   siteUrl: "https://expressfoods.com",
   generateRobotsTxt: true,
-  exclude: ["/admin/*"],
+  exclude: ["/admin/*", "/apple-icon", "/icon.svg", "/manifest.webmanifest"],
 };

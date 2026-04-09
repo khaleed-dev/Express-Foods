@@ -23,7 +23,7 @@ export function GlobalReach() {
           </div>
           <div className="order-1 md:order-2">
             <p className="mb-3 font-semibold md:mb-4">Reach</p>
-            <h2 className="mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-8xl">
+            <h2 className="mb-5 text-5xl font-bold md:mb-6 md:text-4xl lg:text-5xl">
               We ship to where you are
             </h2>
             <p className="mb-6 md:mb-8 md:text-md">

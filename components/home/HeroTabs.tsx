@@ -1,10 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@relume_io/relume-ui";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+
+const SLIDE_DURATION = 6; // seconds per slide
 
 interface TabTrigger {
   value: string;
@@ -79,25 +81,27 @@ function TabContent({ content }: { content: TabContentData }) {
     <div className="flex h-screen flex-col items-center justify-center">
       <div className="px-[5%] py-16 md:py-24 lg:py-28">
         <motion.div
-          className="relative z-10 mx-auto max-w-lg text-center"
-          initial={{ y: "20%", opacity: 0 }}
+          className="relative z-10 mx-auto max-w-3xl text-center"
+          initial={{ y: "15%", opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          exit={{ y: "-20%", opacity: 0 }}
-          transition={{ duration: 0.4, ease: "easeOut" }}
+          exit={{ y: "-15%", opacity: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
         >
-          <h1 className="mb-5 text-6xl font-bold text-text-alternative md:mb-6 md:text-9xl lg:text-10xl">
+          <h1 className="mb-5 font-serif text-4xl font-bold leading-[1.1] text-text-alternative md:mb-6 md:text-5xl lg:text-6xl">
             {content.heading}
           </h1>
-          <p className="text-text-alternative md:text-md">{content.description}</p>
-          <div className="mt-6 flex items-center justify-center gap-x-4 md:mt-8">
+          <p className="mx-auto max-w-2xl text-base leading-relaxed text-white/85 md:text-lg">
+            {content.description}
+          </p>
+          <div className="mt-8 flex items-center justify-center gap-x-5 md:mt-10">
             {content.buttons.map((button, index) => (
               <Link
                 key={index}
                 href={button.href}
                 className={
                   button.variant === "secondary-alt"
-                    ? "inline-flex items-center justify-center border border-white px-6 py-3 text-sm font-semibold text-white transition hover:bg-white hover:text-black"
-                    : "inline-flex items-center justify-center bg-white px-6 py-3 text-sm font-semibold text-black transition hover:bg-white/90"
+                    ? "inline-flex items-center justify-center rounded-md border-2 border-white/80 px-8 py-3.5 text-sm font-semibold text-white transition-all hover:bg-white hover:text-black"
+                    : "inline-flex items-center justify-center rounded-md bg-primary px-8 py-3.5 text-sm font-semibold text-primary-foreground shadow-lg transition-all hover:bg-primary/90"
                 }
               >
                 {button.title}
@@ -107,7 +111,7 @@ function TabContent({ content }: { content: TabContentData }) {
         </motion.div>
       </div>
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 z-10 bg-black/50" />
+        <div className="absolute inset-0 z-10 bg-black/40" />
         <Image
           src={content.image.src}
           alt={content.image.alt}
@@ -123,16 +127,49 @@ function TabContent({ content }: { content: TabContentData }) {
 
 export function HeroTabs() {
   const [activeTab, setActiveTab] = useState("tab-one");
+  const [isPaused, setIsPaused] = useState(false);
+  // Key that increments each time a new slide activates — used to restart the indicator CSS animation
+  const [indicatorKey, setIndicatorKey] = useState(0);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const tabValues = tabs.trigger.map((t) => t.value);
+
+  const advanceTab = useCallback(() => {
+    setActiveTab((prev) => {
+      const currentIndex = tabValues.indexOf(prev);
+      const nextIndex = (currentIndex + 1) % tabValues.length;
+      return tabValues[nextIndex];
+    });
+    setIndicatorKey((k) => k + 1);
+  }, [tabValues]);
+
+  useEffect(() => {
+    if (isPaused) return;
+    intervalRef.current = setInterval(advanceTab, SLIDE_DURATION * 1000);
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [activeTab, isPaused, advanceTab]);
+
+  const handleManualSelect = (value: string) => {
+    setActiveTab(value);
+    setIndicatorKey((k) => k + 1);
+  };
 
   return (
-    <section id="hero" className="relative min-h-screen">
-      <Tabs value={activeTab} onValueChange={setActiveTab}>
+    <section
+      id="hero"
+      className="relative min-h-screen"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
+      <Tabs value={activeTab} onValueChange={handleManualSelect}>
         <AnimatePresence initial={false}>
           {tabs.content.map(
-            (content, index) =>
+            (content) =>
               content.value === activeTab && (
                 <TabsContent
-                  key={index}
+                  key={content.value}
                   value={content.value}
                   className="relative max-h-[60rem] min-h-screen overflow-visible"
                 >
@@ -141,36 +178,43 @@ export function HeroTabs() {
               ),
           )}
         </AnimatePresence>
-        <TabsList className="absolute bottom-12 left-0 right-0 top-auto z-20 mx-auto flex justify-center gap-4 px-[5vw] md:bottom-16 lg:bottom-20 lg:max-w-xl">
-          {tabs.trigger.map((trigger, index) => (
-            <TabsTrigger
-              key={index}
-              value={trigger.value}
-              onClick={() => setActiveTab(trigger.value)}
-              className="relative flex-1 whitespace-normal border-0 bg-transparent px-4 py-4 text-center text-neutral-light duration-0 data-[state=active]:bg-transparent data-[state=active]:text-neutral-white sm:px-8 md:min-w-32"
-            >
-              <span>{trigger.text}</span>
-              <div className="absolute inset-0 top-auto h-1 w-full bg-white/20">
-                <motion.div
-                  className="h-full bg-white"
-                  initial={{ width: "0%" }}
-                  animate={{ width: activeTab === trigger.value ? "100%" : "0%" }}
-                  transition={{
-                    duration: activeTab === trigger.value ? 1.5 : 0.3,
-                    ...(activeTab === trigger.value
-                      ? {
-                          type: "spring",
-                          stiffness: 25,
-                          damping: 30,
+
+        {/* Tab navigation bar */}
+        <div className="absolute bottom-0 left-0 right-0 z-20 pb-8 md:pb-12 lg:pb-16">
+          <TabsList className="mx-auto flex max-w-2xl justify-center">
+            <div className="flex w-full items-stretch gap-0 rounded-xl bg-black/30 px-2 py-3 backdrop-blur-md sm:px-4 md:gap-1 md:px-6 md:py-4">
+              {tabs.trigger.map((trigger) => {
+                const isActive = activeTab === trigger.value;
+                return (
+                  <TabsTrigger
+                    key={trigger.value}
+                    value={trigger.value}
+                    onClick={() => handleManualSelect(trigger.value)}
+                    className="relative flex-1 border-0 bg-transparent px-3 py-3 text-center text-xs font-medium text-white/50 transition-colors duration-200 data-[state=active]:bg-transparent data-[state=active]:text-white sm:px-5 sm:text-sm md:px-6"
+                  >
+                    <span className="relative z-10">{trigger.text}</span>
+                    {/* Progress indicator bar */}
+                    <div className="absolute inset-x-2 bottom-0 h-[3px] overflow-hidden rounded-full bg-white/15 sm:inset-x-3">
+                      <div
+                        key={`indicator-${trigger.value}-${indicatorKey}`}
+                        className="h-full rounded-full bg-white"
+                        style={
+                          isActive
+                            ? {
+                                animation: `indicatorFill ${SLIDE_DURATION}s linear forwards`,
+                              }
+                            : { width: "0%" }
                         }
-                      : { ease: "easeInOut" }),
-                  }}
-                />
-              </div>
-            </TabsTrigger>
-          ))}
-        </TabsList>
+                      />
+                    </div>
+                  </TabsTrigger>
+                );
+              })}
+            </div>
+          </TabsList>
+        </div>
       </Tabs>
+
     </section>
   );
 }

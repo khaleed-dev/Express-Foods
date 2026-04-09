@@ -97,7 +97,7 @@ export function ContactForm() {
         <div>
           <div className="mb-6 md:mb-8">
             <p className="mb-3 font-semibold md:mb-4">Send</p>
-            <h2 className="mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-8xl">
+            <h2 className="mb-5 text-5xl font-bold md:mb-6 md:text-4xl lg:text-5xl">
               Your inquiry
             </h2>
             <p className="md:text-md">
@@ -112,7 +112,7 @@ export function ContactForm() {
             </div>
             <div className="flex items-center gap-4">
               <BiPhone className="size-6 flex-none" />
-              <p>+20 2 XXXX XXXX</p>
+              <p>+20 2 2345 6789</p>
             </div>
             <div className="flex items-center gap-4">
               <BiMap className="size-6 flex-none" />
