@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://expressfoods.com
+
+# Sitemaps
+Sitemap: https://expressfoods.com/sitemap.xml
