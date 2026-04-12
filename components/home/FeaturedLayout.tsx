@@ -19,7 +19,7 @@ const tabItems: TabItem[] = [
     description:
       "No seasonal gaps. The Nile Delta grows what the world needs, when it needs it.",
     image: {
-      src: "/images/sections/home-usp-01.webp",
+      src: "/images/sections/Egypt's climate works for you section/Year-round harvest.webp",
       alt: "Year-round harvest operations in the Nile Delta",
     },
   },
@@ -28,7 +28,7 @@ const tabItems: TabItem[] = [
     description:
       "Strategic proximity to Europe means fresher produce on your shelves, faster margins in your business.",
     image: {
-      src: "/images/sections/home-usp-02.webp",
+      src: "/images/sections/Egypt's climate works for you section/Three to five day delivery.webp",
       alt: "Express shipping and logistics for fast delivery",
     },
   },
@@ -37,7 +37,7 @@ const tabItems: TabItem[] = [
     description:
       "One partner for both product lines. Consistent quality, simplified procurement.",
     image: {
-      src: "/images/sections/home-process.webp",
+      src: "/images/sections/Egypt's climate works for you section/Dual fresh and frozen.webp",
       alt: "Fresh and IQF frozen processing facilities",
     },
   },
@@ -87,7 +87,7 @@ function TabItemComponent({
       transition={{ duration: 0.2 }}
       className="relative flex size-full items-center justify-center"
     >
-      <div className="relative aspect-square w-full md:aspect-[4/3]">
+      <div className="relative aspect-square w-full md:aspect-4/3">
         <Image
           src={tabItem.image.src}
           alt={tabItem.image.alt}

@@ -10,21 +10,25 @@ const productCategories = [
     heading: "Fresh citrus",
     description: "Oranges, mandarins, lemons. Peak season November through May.",
     href: "/products/citrus",
+    image: { src: "/images/sections/what we grow and ship section images/Fresh citrus.webp", alt: "Fresh citrus — oranges, mandarins and lemons from Egypt" },
   },
   {
     heading: "Fresh fruits",
     description: "Strawberries, mangoes, pomegranates, grapes, melons, guava.",
     href: "/products/fresh-fruits",
+    image: { src: "/images/sections/what we grow and ship section images/Fresh fruits.webp", alt: "Fresh fruits — strawberries, mangoes and pomegranates from Egypt" },
   },
   {
     heading: "Fresh vegetables",
     description: "Potatoes, onions, garlic, green beans, okra, peppers, lettuce.",
     href: "/products/vegetables",
+    image: { src: "/images/sections/what we grow and ship section images/Fresh vegetables.webp", alt: "Fresh vegetables — potatoes, onions and peppers from Egypt" },
   },
   {
     heading: "IQF frozen",
     description: "Okra, molokhia, green beans, spinach, artichoke, strawberries, mango.",
     href: "/products/iqf-frozen",
+    image: { src: "/images/sections/what we grow and ship section images/IQF frozen.png", alt: "IQF frozen produce — okra, green beans and strawberries from Egypt" },
   },
 ];
 
@@ -46,12 +50,12 @@ export function ProductRange() {
           <div className="grid grid-cols-1 items-start gap-y-12 md:grid-cols-2 md:gap-x-8 md:gap-y-16 lg:grid-cols-4">
             {productCategories.map((category, index) => (
               <div key={index} className="w-full">
-                <div className="relative mb-5 aspect-[4/3] md:mb-6">
+                <div className="relative mb-5 aspect-4/3 overflow-hidden bg-muted md:mb-6">
                   <Image
-                    src="/images/sections/home-products-range.webp"
-                    alt={category.heading}
+                    src={category.image.src}
+                    alt={category.image.alt}
                     fill
-                    className="object-cover"
+                    className="object-contain"
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   />
                 </div>

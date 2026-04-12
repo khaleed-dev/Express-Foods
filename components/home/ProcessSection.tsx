@@ -67,8 +67,8 @@ export function ProcessSection() {
             <div className="flex flex-col border border-border-primary sm:col-span-2 sm:col-start-1 sm:row-span-2 sm:row-start-3 lg:col-span-2 lg:col-start-3 lg:row-span-2 lg:row-start-1">
               <div className="relative flex items-center justify-center aspect-[16/9]">
                 <Image
-                  src="/images/sections/home-process.webp"
-                  alt="Cold chain temperature monitoring throughout shipping"
+                  src="/images/sections/From soil to ship/From soil to ship section image.webp"
+                  alt="Expert hands hand-picking fresh produce from the orchard"
                   fill
                   className="object-cover"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 50vw"
@@ -78,11 +78,11 @@ export function ProcessSection() {
                 <div>
                   <p className="mb-2 text-sm font-semibold">Five</p>
                   <h3 className="mb-5 text-4xl font-bold leading-[1.2] md:mb-6 md:text-5xl lg:text-6xl">
-                    Temperature monitored throughout
+                    Hand-picked at the source
                   </h3>
                   <p>
-                    Cold chain is not a promise. It is a guarantee backed by
-                    data.
+                    Only produce selected by skilled hands at peak ripeness
+                    leaves our certified farms.
                   </p>
                 </div>
                 <div className="mt-6 flex flex-wrap items-center gap-4 md:mt-8">
