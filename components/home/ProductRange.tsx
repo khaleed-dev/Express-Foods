@@ -1,9 +1,9 @@
 "use client";
 
-import { Button } from "@relume_io/relume-ui";
 import Image from "next/image";
 import Link from "next/link";
 import { RxChevronRight } from "react-icons/rx";
+import { AnimatedButton } from "@/components/ui/animated-button";
 
 const productCategories = [
   {
@@ -47,37 +47,43 @@ export function ProductRange() {
               From the Nile Delta to your shelves.
             </p>
           </div>
-          <div className="grid grid-cols-1 items-start gap-y-12 md:grid-cols-2 md:gap-x-8 md:gap-y-16 lg:grid-cols-4">
+          <div className="grid w-full grid-cols-1 items-start gap-y-12 md:grid-cols-2 md:gap-x-8 md:gap-y-16 lg:grid-cols-4">
             {productCategories.map((category, index) => (
-              <div key={index} className="w-full">
+              <Link
+                key={index}
+                href={category.href}
+                className="group/card flex w-full flex-col"
+              >
                 <div className="relative mb-5 aspect-4/3 overflow-hidden bg-muted md:mb-6">
                   <Image
                     src={category.image.src}
                     alt={category.image.alt}
                     fill
-                    className="object-contain"
+                    className="object-contain transition-transform duration-500 ease-out group-hover/card:scale-105"
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   />
+                  <div className="absolute inset-0 bg-foreground/0 transition-colors duration-300 group-hover/card:bg-foreground/5" />
                 </div>
-                <h3 className="mb-3 text-center text-xl font-bold md:mb-4 md:text-2xl">
+                <h3 className="mb-3 text-center text-xl font-bold transition-colors duration-200 group-hover/card:text-primary md:mb-4 md:text-2xl">
                   {category.heading}
                 </h3>
                 <p className="text-center">{category.description}</p>
-              </div>
+                <div className="mt-3 flex justify-center">
+                  <span className="inline-flex -translate-x-2 items-center gap-1 text-sm font-semibold text-primary opacity-0 transition-all duration-300 ease-out group-hover/card:translate-x-0 group-hover/card:opacity-100">
+                    Explore
+                    <RxChevronRight className="size-4" />
+                  </span>
+                </div>
+              </Link>
             ))}
           </div>
           <div className="mt-12 flex w-full flex-wrap items-center justify-center gap-4 md:mt-18 lg:mt-20">
-            <Button asChild variant="secondary">
-              <Link href="/products">View all products</Link>
-            </Button>
-            <Button
-              asChild
-              variant="link"
-              size="link"
-              iconRight={<RxChevronRight />}
-            >
-              <Link href="/contact?intent=quote">Request a quote</Link>
-            </Button>
+            <AnimatedButton href="/products" variant="secondary">
+              View all products
+            </AnimatedButton>
+            <AnimatedButton href="/contact?intent=quote" variant="link" withArrow>
+              Request a quote
+            </AnimatedButton>
           </div>
         </div>
       </div>

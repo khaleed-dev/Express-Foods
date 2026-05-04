@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@relume_io/relume-ui";
 import Image from "next/image";
 import Link from "next/link";
 import { RxChevronRight } from "react-icons/rx";
@@ -53,36 +52,40 @@ export function FourPillars() {
         </div>
         <div className="grid auto-cols-fr grid-cols-1 gap-6 sm:grid-cols-2 md:gap-8 lg:grid-cols-4">
           {pillars.map((pillar, index) => (
-            <div key={index} className="flex flex-col border border-border-primary">
+            <Link
+              key={index}
+              href={pillar.href}
+              className="group/card relative flex flex-col overflow-hidden border border-border-primary bg-background transition-all duration-300 ease-out hover:-translate-y-1 hover:border-primary/60 hover:shadow-2xl hover:shadow-primary/10"
+            >
               <div className="flex flex-1 flex-col justify-center p-6">
                 <div>
-                  <p className="mb-2 text-sm font-semibold">{pillar.label}</p>
-                  <h3 className="mb-2 text-lg font-bold leading-[1.4] md:text-2xl">
+                  <p className="mb-2 text-sm font-semibold text-primary/80">{pillar.label}</p>
+                  <h3 className="mb-2 text-lg font-bold leading-[1.4] transition-colors duration-200 group-hover/card:text-primary md:text-2xl">
                     {pillar.heading}
                   </h3>
                   <p>{pillar.description}</p>
                 </div>
                 <div className="mt-5 md:mt-6">
-                  <Button
-                    asChild
-                    variant="link"
-                    size="link"
-                    iconRight={<RxChevronRight />}
-                  >
-                    <Link href={pillar.href}>Learn more</Link>
-                  </Button>
+                  <span className="inline-flex items-center gap-1 text-sm font-semibold transition-colors duration-200 group-hover/card:text-primary">
+                    <span className="relative">
+                      Learn more
+                      <span className="absolute -bottom-0.5 left-0 h-[1.5px] w-full origin-left scale-x-0 bg-current transition-transform duration-300 ease-out group-hover/card:scale-x-100" />
+                    </span>
+                    <RxChevronRight className="size-4 transition-transform duration-200 ease-out group-hover/card:translate-x-1" />
+                  </span>
                 </div>
               </div>
-              <div className="relative flex w-full flex-col items-center justify-center self-start aspect-[4/3]">
+              <div className="relative flex aspect-[4/3] w-full flex-col items-center justify-center self-start overflow-hidden">
                 <Image
                   src={pillar.image.src}
                   alt={pillar.image.alt}
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-700 ease-out group-hover/card:scale-105"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 />
+                <div className="absolute inset-0 bg-foreground/0 transition-colors duration-300 group-hover/card:bg-foreground/5" />
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

@@ -1,8 +1,7 @@
 "use client";
 
-import { Button } from "@relume_io/relume-ui";
 import Image from "next/image";
-import Link from "next/link";
+import { AnimatedButton } from "@/components/ui/animated-button";
 
 interface PageHeroProps {
   tagline?: string;
@@ -44,16 +43,14 @@ export function PageHero({
         {(primaryCta || secondaryCta) && (
           <div className="mt-6 flex flex-wrap items-center justify-center gap-4 md:mt-8">
             {primaryCta && (
-              <Link href={primaryCta.href}>
-                <Button title={primaryCta.label}>{primaryCta.label}</Button>
-              </Link>
+              <AnimatedButton href={primaryCta.href} variant="primary" withArrow>
+                {primaryCta.label}
+              </AnimatedButton>
             )}
             {secondaryCta && (
-              <Link href={secondaryCta.href}>
-                <Button title={secondaryCta.label} variant="secondary-alt">
-                  {secondaryCta.label}
-                </Button>
-              </Link>
+              <AnimatedButton href={secondaryCta.href} variant="ghost-light">
+                {secondaryCta.label}
+              </AnimatedButton>
             )}
           </div>
         )}

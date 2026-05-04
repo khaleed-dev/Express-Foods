@@ -1,8 +1,6 @@
 "use client";
 
-import { Button } from "@relume_io/relume-ui";
 import Image from "next/image";
-import Link from "next/link";
 import {
   useScroll,
   useTransform,
@@ -11,6 +9,7 @@ import {
 } from "framer-motion";
 import { useRef } from "react";
 import { useMediaQuery } from "@relume_io/relume-ui";
+import { AnimatedButton } from "@/components/ui/animated-button";
 
 interface TrustItem {
   heading: string;
@@ -158,35 +157,12 @@ export function WhyBuyersTrustUs() {
                 twenty-four hours.
               </p>
               <div className="mt-6 flex flex-wrap items-center gap-4 md:mt-8">
-                <Link href="/products">
-                  <Button title="Explore products" variant="secondary">
-                    Explore products
-                  </Button>
-                </Link>
-                <Link href="/contact?intent=quote">
-                  <Button
-                    title="Request a quote"
-                    variant="link"
-                    size="link"
-                    iconRight={
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="m9 18 6-6-6-6" />
-                      </svg>
-                    }
-                  >
-                    Request a quote
-                  </Button>
-                </Link>
+                <AnimatedButton href="/products" variant="secondary">
+                  Explore products
+                </AnimatedButton>
+                <AnimatedButton href="/contact?intent=quote" variant="link" withArrow>
+                  Request a quote
+                </AnimatedButton>
               </div>
             </div>
 

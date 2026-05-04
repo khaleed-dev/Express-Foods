@@ -1,9 +1,7 @@
 "use client";
 
-import { Button } from "@relume_io/relume-ui";
 import Image from "next/image";
-import Link from "next/link";
-import { RxChevronRight } from "react-icons/rx";
+import { AnimatedButton } from "@/components/ui/animated-button";
 
 export function GlobalReach() {
   return (
@@ -11,12 +9,12 @@ export function GlobalReach() {
       <div className="container">
         <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2 lg:gap-x-20">
           <div className="order-2 md:order-1">
-            <div className="relative aspect-square w-full overflow-hidden">
+            <div className="group/img relative aspect-square w-full overflow-hidden">
               <Image
                 src="/images/sections/home-global-reach.webp"
                 alt="Express Foods global shipping routes and destinations"
                 fill
-                className="object-cover"
+                className="object-cover transition-transform duration-700 ease-out group-hover/img:scale-105"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
@@ -31,8 +29,8 @@ export function GlobalReach() {
               Asia. Consistent supply. Reliable partners. Global scale.
             </p>
             <div className="grid grid-cols-1 gap-6 py-2 sm:grid-cols-2">
-              <div>
-                <h6 className="mb-3 text-md font-bold leading-[1.4] md:mb-4 md:text-xl">
+              <div className="group/region cursor-default border-l-2 border-border-primary pl-4 transition-all duration-200 hover:border-primary">
+                <h6 className="mb-3 text-md font-bold leading-[1.4] transition-colors duration-200 group-hover/region:text-primary md:mb-4 md:text-xl">
                   Europe
                 </h6>
                 <p>
@@ -40,8 +38,8 @@ export function GlobalReach() {
                   days.
                 </p>
               </div>
-              <div>
-                <h6 className="mb-3 text-md font-bold leading-[1.4] md:mb-4 md:text-xl">
+              <div className="group/region cursor-default border-l-2 border-border-primary pl-4 transition-all duration-200 hover:border-primary">
+                <h6 className="mb-3 text-md font-bold leading-[1.4] transition-colors duration-200 group-hover/region:text-primary md:mb-4 md:text-xl">
                   Gulf states
                 </h6>
                 <p>
@@ -51,17 +49,12 @@ export function GlobalReach() {
               </div>
             </div>
             <div className="mt-6 flex flex-wrap gap-4 md:mt-8">
-              <Button asChild variant="secondary">
-                <Link href="/about">Explore markets</Link>
-              </Button>
-              <Button
-                asChild
-                iconRight={<RxChevronRight />}
-                variant="link"
-                size="link"
-              >
-                <Link href="/contact?intent=quote">Get a quote</Link>
-              </Button>
+              <AnimatedButton href="/about" variant="secondary">
+                Explore markets
+              </AnimatedButton>
+              <AnimatedButton href="/contact?intent=quote" variant="link" withArrow>
+                Get a quote
+              </AnimatedButton>
             </div>
           </div>
         </div>

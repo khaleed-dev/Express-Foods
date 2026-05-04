@@ -1,9 +1,7 @@
 "use client";
 
-import { Button } from "@relume_io/relume-ui";
 import Image from "next/image";
-import Link from "next/link";
-import { RxChevronRight } from "react-icons/rx";
+import { AnimatedButton } from "@/components/ui/animated-button";
 
 const stats = [
   { value: "31+", label: "Products exported year-round" },
@@ -17,13 +15,13 @@ export function StorySection() {
         <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2 lg:gap-x-20">
 
           {/* Image */}
-          <div className="relative w-full overflow-hidden">
+          <div className="group/img relative w-full overflow-hidden">
             <div className="relative aspect-4/3 w-full">
               <Image
                 src="/images/sections/A promise that stars in the soil section/two-lakes-with-forest-green-field-dividing-them-country-road-passing-through-nearby.webp"
                 alt="The Nile Delta — where every Express Foods shipment begins"
                 fill
-                className="object-cover"
+                className="object-cover transition-transform duration-700 ease-out group-hover/img:scale-105"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
@@ -45,8 +43,11 @@ export function StorySection() {
             {/* Stats */}
             <div className="mb-6 grid grid-cols-2 gap-6 border-t border-border-primary pt-6 md:mb-8 md:pt-8">
               {stats.map((stat) => (
-                <div key={stat.value}>
-                  <p className="mb-1 text-4xl font-bold md:text-5xl">
+                <div
+                  key={stat.value}
+                  className="group/stat cursor-default"
+                >
+                  <p className="mb-1 text-4xl font-bold transition-colors duration-200 group-hover/stat:text-primary md:text-5xl">
                     {stat.value}
                   </p>
                   <p className="text-sm text-neutral-light">{stat.label}</p>
@@ -55,17 +56,12 @@ export function StorySection() {
             </div>
 
             <div className="flex flex-wrap items-center gap-4">
-              <Button asChild variant="secondary">
-                <Link href="/about">Learn our story</Link>
-              </Button>
-              <Button
-                asChild
-                variant="link"
-                size="link"
-                iconRight={<RxChevronRight />}
-              >
-                <Link href="/about">About us</Link>
-              </Button>
+              <AnimatedButton href="/about" variant="secondary">
+                Learn our story
+              </AnimatedButton>
+              <AnimatedButton href="/about" variant="link" withArrow>
+                About us
+              </AnimatedButton>
             </div>
           </div>
 

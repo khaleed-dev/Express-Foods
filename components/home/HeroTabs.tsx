@@ -5,6 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@relume_io/relume-ui";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { RxChevronRight } from "react-icons/rx";
 
 const SLIDE_DURATION = 6; // seconds per slide
 
@@ -94,19 +95,24 @@ function TabContent({ content }: { content: TabContentData }) {
             {content.description}
           </p>
           <div className="mt-8 flex items-center justify-center gap-x-5 md:mt-10">
-            {content.buttons.map((button, index) => (
-              <Link
-                key={index}
-                href={button.href}
-                className={
-                  button.variant === "secondary-alt"
-                    ? "inline-flex items-center justify-center rounded-md border-2 border-white/80 px-8 py-3.5 text-sm font-semibold text-white transition-all hover:bg-white hover:text-black"
-                    : "inline-flex items-center justify-center rounded-md bg-primary px-8 py-3.5 text-sm font-semibold text-primary-foreground shadow-lg transition-all hover:bg-primary/90"
-                }
-              >
-                {button.title}
-              </Link>
-            ))}
+            {content.buttons.map((button, index) => {
+              const isSecondary = button.variant === "secondary-alt";
+              return (
+                <Link
+                  key={index}
+                  href={button.href}
+                  className={
+                    "group/hero-btn inline-flex items-center justify-center gap-2 rounded-md px-8 py-3.5 text-sm font-semibold transition-all duration-200 ease-out hover:-translate-y-0.5 active:translate-y-0 " +
+                    (isSecondary
+                      ? "border-2 border-white/80 text-white hover:bg-white hover:text-black"
+                      : "bg-primary text-primary-foreground shadow-lg hover:shadow-xl hover:shadow-primary/40 hover:bg-primary/95")
+                  }
+                >
+                  <span>{button.title}</span>
+                  <RxChevronRight className="size-4 transition-transform duration-200 ease-out group-hover/hero-btn:translate-x-1" />
+                </Link>
+              );
+            })}
           </div>
         </motion.div>
       </div>

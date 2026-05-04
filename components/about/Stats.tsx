@@ -1,8 +1,7 @@
 "use client";
 
-import { Button } from "@relume_io/relume-ui";
 import Image from "next/image";
-import Link from "next/link";
+import { AnimatedButton } from "@/components/ui/animated-button";
 
 interface Stat {
   value: string;
@@ -15,6 +14,9 @@ const stats: Stat[] = [
   { value: "31", label: "Products exported" },
   { value: "24h", label: "Response guarantee" },
 ];
+
+const statCardClasses =
+  "group/stat flex cursor-default flex-col justify-center border border-border-primary p-8 text-center transition-all duration-300 ease-out hover:-translate-y-1 hover:border-primary/60 hover:shadow-xl hover:shadow-primary/10";
 
 export function Stats() {
   return (
@@ -35,42 +37,21 @@ export function Stats() {
               with full documentation.
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-4 md:mt-8">
-              <Link href="/products">
-                <Button title="Explore products" variant="secondary">
-                  Explore products
-                </Button>
-              </Link>
-              <Link href="/contact?intent=quote">
-                <Button
-                  title="Request a quote"
-                  variant="link"
-                  size="link"
-                  iconRight={
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="m9 18 6-6-6-6" />
-                    </svg>
-                  }
-                >
-                  Request a quote
-                </Button>
-              </Link>
+              <AnimatedButton href="/products" variant="secondary">
+                Explore products
+              </AnimatedButton>
+              <AnimatedButton href="/contact?intent=quote" variant="link" withArrow>
+                Request a quote
+              </AnimatedButton>
             </div>
           </div>
         </div>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {/* First stat (spans 2 rows on large screens) */}
-          <div className="flex flex-col justify-center border border-border-primary p-8 text-center md:col-span-2 md:row-span-1 lg:col-span-1 lg:row-span-2">
-            <p className="mb-2 text-5xl font-bold leading-[1.3] md:text-[4rem] lg:text-[5rem]">
+          <div
+            className={`${statCardClasses} md:col-span-2 md:row-span-1 lg:col-span-1 lg:row-span-2`}
+          >
+            <p className="mb-2 text-5xl font-bold leading-[1.3] transition-colors duration-200 group-hover/stat:text-primary md:text-[4rem] lg:text-[5rem]">
               {stats[0].value}
             </p>
             <h3 className="text-md font-bold leading-[1.4] md:text-xl">
@@ -79,19 +60,19 @@ export function Stats() {
           </div>
 
           {/* Background image */}
-          <div className="relative aspect-[3/2] overflow-hidden">
+          <div className="group/img relative aspect-[3/2] overflow-hidden">
             <Image
               src="/images/sections/about-stats.webp"
               alt="Express Foods export operations and global shipping"
               fill
-              className="object-cover"
+              className="object-cover transition-transform duration-700 ease-out group-hover/img:scale-105"
               sizes="(max-width: 768px) 100vw, 33vw"
             />
           </div>
 
           {/* Second stat */}
-          <div className="flex flex-col justify-center border border-border-primary p-8 text-center">
-            <p className="mb-2 text-5xl font-bold leading-[1.3] md:text-[4rem] lg:text-[5rem]">
+          <div className={statCardClasses}>
+            <p className="mb-2 text-5xl font-bold leading-[1.3] transition-colors duration-200 group-hover/stat:text-primary md:text-[4rem] lg:text-[5rem]">
               {stats[1].value}
             </p>
             <h3 className="text-md font-bold leading-[1.4] md:text-xl">
@@ -100,8 +81,8 @@ export function Stats() {
           </div>
 
           {/* Third stat */}
-          <div className="flex flex-col justify-center border border-border-primary p-8 text-center">
-            <p className="mb-2 text-5xl font-bold leading-[1.3] md:text-[4rem] lg:text-[5rem]">
+          <div className={statCardClasses}>
+            <p className="mb-2 text-5xl font-bold leading-[1.3] transition-colors duration-200 group-hover/stat:text-primary md:text-[4rem] lg:text-[5rem]">
               {stats[2].value}
             </p>
             <h3 className="text-md font-bold leading-[1.4] md:text-xl">
@@ -109,20 +90,20 @@ export function Stats() {
             </h3>
           </div>
 
-          {/* Second background image slot (reuse same image) */}
-          <div className="relative aspect-[3/2] overflow-hidden">
+          {/* Second background image slot */}
+          <div className="group/img relative aspect-[3/2] overflow-hidden">
             <Image
               src="/images/sections/about-stats.webp"
               alt="Express Foods certified produce ready for export"
               fill
-              className="object-cover"
+              className="object-cover transition-transform duration-700 ease-out group-hover/img:scale-105"
               sizes="(max-width: 768px) 100vw, 33vw"
             />
           </div>
 
           {/* Fourth stat */}
-          <div className="flex flex-col justify-center border border-border-primary p-8 text-center">
-            <p className="mb-2 text-5xl font-bold leading-[1.3] md:text-[4rem] lg:text-[5rem]">
+          <div className={statCardClasses}>
+            <p className="mb-2 text-5xl font-bold leading-[1.3] transition-colors duration-200 group-hover/stat:text-primary md:text-[4rem] lg:text-[5rem]">
               {stats[3].value}
             </p>
             <h3 className="text-md font-bold leading-[1.4] md:text-xl">

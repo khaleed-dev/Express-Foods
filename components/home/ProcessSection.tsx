@@ -1,9 +1,7 @@
 "use client";
 
-import { Button } from "@relume_io/relume-ui";
 import Image from "next/image";
-import Link from "next/link";
-import { RxChevronRight } from "react-icons/rx";
+import { AnimatedButton } from "@/components/ui/animated-button";
 
 const processSteps = [
   {
@@ -40,44 +38,42 @@ export function ProcessSection() {
         <div className="grid grid-cols-1 gap-6 md:gap-8">
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:gap-8 lg:grid-cols-4">
             {processSteps.map((step, index) => (
-              <div key={index} className="flex flex-col border border-border-primary">
+              <div
+                key={index}
+                className="group/step flex flex-col border border-border-primary bg-background transition-all duration-300 ease-out hover:-translate-y-1 hover:border-primary/60 hover:shadow-xl hover:shadow-primary/10"
+              >
                 <div className="flex h-full flex-col justify-between p-6 md:p-8 lg:p-6">
                   <div>
-                    <div className="mb-3 flex size-12 items-center justify-center rounded-full bg-background-alternative text-text-alternative font-bold md:mb-4">
+                    <div className="mb-3 flex size-12 items-center justify-center rounded-full bg-background-alternative font-bold text-text-alternative transition-all duration-300 ease-out group-hover/step:scale-110 group-hover/step:bg-primary group-hover/step:text-primary-foreground md:mb-4">
                       {index + 1}
                     </div>
-                    <h3 className="mb-2 text-xl font-bold md:text-2xl">
+                    <h3 className="mb-2 text-xl font-bold transition-colors duration-200 group-hover/step:text-primary md:text-2xl">
                       {step.heading}
                     </h3>
                     <p>{step.description}</p>
                   </div>
                   <div className="mt-5 flex items-center gap-4 md:mt-6">
-                    <Button
-                      asChild
-                      variant="link"
-                      size="link"
-                      iconRight={<RxChevronRight />}
-                    >
-                      <Link href="/about">Learn more</Link>
-                    </Button>
+                    <AnimatedButton href="/about" variant="link" withArrow>
+                      Learn more
+                    </AnimatedButton>
                   </div>
                 </div>
               </div>
             ))}
-            <div className="flex flex-col border border-border-primary sm:col-span-2 sm:col-start-1 sm:row-span-2 sm:row-start-3 lg:col-span-2 lg:col-start-3 lg:row-span-2 lg:row-start-1">
-              <div className="relative flex items-center justify-center aspect-[16/9]">
+            <div className="group/feature flex flex-col overflow-hidden border border-border-primary bg-background transition-all duration-300 ease-out hover:border-primary/60 hover:shadow-2xl hover:shadow-primary/10 sm:col-span-2 sm:col-start-1 sm:row-span-2 sm:row-start-3 lg:col-span-2 lg:col-start-3 lg:row-span-2 lg:row-start-1">
+              <div className="relative flex aspect-[16/9] items-center justify-center overflow-hidden">
                 <Image
                   src="/images/sections/From soil to ship/From soil to ship section image.webp"
                   alt="Expert hands hand-picking fresh produce from the orchard"
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-700 ease-out group-hover/feature:scale-105"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 50vw"
                 />
               </div>
               <div className="flex flex-1 flex-col justify-center p-6 md:p-8 lg:p-12">
                 <div>
-                  <p className="mb-2 text-sm font-semibold">Five</p>
-                  <h3 className="mb-5 text-4xl font-bold leading-[1.2] md:mb-6 md:text-5xl lg:text-6xl">
+                  <p className="mb-2 text-sm font-semibold text-primary/80">Five</p>
+                  <h3 className="mb-5 text-4xl font-bold leading-[1.2] transition-colors duration-200 group-hover/feature:text-primary md:mb-6 md:text-5xl lg:text-6xl">
                     Hand-picked at the source
                   </h3>
                   <p>
@@ -86,17 +82,12 @@ export function ProcessSection() {
                   </p>
                 </div>
                 <div className="mt-6 flex flex-wrap items-center gap-4 md:mt-8">
-                  <Button asChild variant="secondary">
-                    <Link href="/about">Explore</Link>
-                  </Button>
-                  <Button
-                    asChild
-                    variant="link"
-                    size="link"
-                    iconRight={<RxChevronRight />}
-                  >
-                    <Link href="/contact?intent=quote">Request a quote</Link>
-                  </Button>
+                  <AnimatedButton href="/about" variant="secondary">
+                    Explore
+                  </AnimatedButton>
+                  <AnimatedButton href="/contact?intent=quote" variant="link" withArrow>
+                    Request a quote
+                  </AnimatedButton>
                 </div>
               </div>
             </div>

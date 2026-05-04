@@ -1,10 +1,10 @@
 "use client";
 
-import { Button } from "@relume_io/relume-ui";
 import React from "react";
-import { RxChevronRight } from "react-icons/rx";
 import Image from "next/image";
 import Link from "next/link";
+import { AnimatedButton } from "@/components/ui/animated-button";
+import { RxChevronRight } from "react-icons/rx";
 
 interface BlogPreviewPost {
   slug: string;
@@ -72,63 +72,49 @@ export function BlogPreview({
           </div>
         </div>
 
-        {/* Blog post cards grid */}
+        {/* Post cards grid */}
         <div className="grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
           {posts.map((post) => (
-            <div key={post.slug} className="flex flex-col">
-              <Link
-                href={`/blog/${post.slug}`}
-                className="mb-6 inline-block w-full"
-              >
-                <div className="w-full overflow-hidden">
-                  <Image
-                    src={post.image}
-                    alt={post.title}
-                    width={800}
-                    height={450}
-                    className="aspect-video size-full object-cover"
-                  />
-                </div>
-              </Link>
+            <Link
+              key={post.slug}
+              href={`/blog/${post.slug}`}
+              className="group/card flex flex-col"
+            >
+              <div className="mb-6 w-full overflow-hidden">
+                <Image
+                  src={post.image}
+                  alt={post.title}
+                  width={800}
+                  height={450}
+                  className="aspect-video size-full object-cover transition-transform duration-700 ease-out group-hover/card:scale-105"
+                />
+              </div>
               <div className="rb-4 mb-4 flex w-full items-center justify-start">
-                <p className="mr-4 bg-background-secondary px-2 py-1 text-sm font-semibold">
+                <p className="mr-4 bg-background-secondary px-2 py-1 text-sm font-semibold transition-colors duration-200 group-hover/card:bg-primary group-hover/card:text-primary-foreground">
                   {post.category}
                 </p>
                 <p className="inline text-sm font-semibold">{post.readTime}</p>
               </div>
-              <Link
-                href={`/blog/${post.slug}`}
-                className="mb-2 block text-xl font-bold md:text-2xl"
-              >
+              <h3 className="mb-2 block text-xl font-bold transition-colors duration-200 group-hover/card:text-primary md:text-2xl">
                 {post.title}
-              </Link>
+              </h3>
               <p>{post.excerpt}</p>
-              <Link href={`/blog/${post.slug}`}>
-                <Button
-                  variant="link"
-                  size="link"
-                  className="mt-6 flex items-center justify-center gap-x-2"
-                  iconRight={<RxChevronRight />}
-                >
+              <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold transition-colors duration-200 group-hover/card:text-primary">
+                <span className="relative">
                   Read more
-                </Button>
-              </Link>
-            </div>
+                  <span className="absolute -bottom-0.5 left-0 h-[1.5px] w-full origin-left scale-x-0 bg-current transition-transform duration-300 ease-out group-hover/card:scale-x-100" />
+                </span>
+                <RxChevronRight className="size-4 transition-transform duration-200 ease-out group-hover/card:translate-x-1" />
+              </span>
+            </Link>
           ))}
         </div>
 
         {/* View all link */}
         <div className="mt-12 flex justify-center md:mt-16">
-          <Link href="/blog">
-            <Button
-              variant="link"
-              size="link"
-              className="flex items-center justify-center gap-x-2"
-              iconRight={<RxChevronRight />}
-            >
-              View all articles
-            </Button>
-          </Link>
+          <AnimatedButton href="/blog" variant="link" withArrow>
+            View all articles
+          </AnimatedButton>
         </div>
       </div>
     </section>

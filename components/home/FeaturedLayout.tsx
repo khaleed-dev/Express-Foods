@@ -1,11 +1,9 @@
 "use client";
 
-import { Button } from "@relume_io/relume-ui";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
-import { RxChevronRight } from "react-icons/rx";
+import { AnimatedButton } from "@/components/ui/animated-button";
 
 interface TabItem {
   heading: string;
@@ -49,8 +47,10 @@ function useRelume() {
   const setActiveTabSetter = (index: number) => () => setActiveTab(index);
 
   const getActiveTabButtonStyles = (index: number): string => {
-    return `cursor-pointer border-b border-border-primary py-4 ${
-      activeTab === index ? "opacity-100" : "opacity-25"
+    return `group/tab cursor-pointer border-b py-4 transition-all duration-300 ease-out ${
+      activeTab === index
+        ? "border-primary opacity-100"
+        : "border-border-primary opacity-40 hover:opacity-75 hover:border-foreground/40"
     }`;
   };
 
@@ -150,7 +150,7 @@ export function FeaturedLayout() {
                     onClick={useActive.setActiveTabSetter(index)}
                     className={useActive.getActiveTabButtonStyles(index)}
                   >
-                    <h3 className="text-xl font-bold md:text-2xl">
+                    <h3 className="text-xl font-bold transition-colors duration-200 group-hover/tab:text-primary md:text-2xl">
                       {item.heading}
                     </h3>
                     <motion.div
@@ -166,17 +166,12 @@ export function FeaturedLayout() {
               </div>
             </div>
             <div className="mt-6 flex flex-wrap items-center gap-4 md:mt-8">
-              <Button asChild variant="secondary">
-                <Link href="/about">Learn more</Link>
-              </Button>
-              <Button
-                asChild
-                variant="link"
-                size="link"
-                iconRight={<RxChevronRight />}
-              >
-                <Link href="/contact?intent=quote">Get a quote</Link>
-              </Button>
+              <AnimatedButton href="/about" variant="secondary">
+                Learn more
+              </AnimatedButton>
+              <AnimatedButton href="/contact?intent=quote" variant="link" withArrow>
+                Get a quote
+              </AnimatedButton>
             </div>
           </div>
         </div>

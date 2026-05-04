@@ -5,7 +5,6 @@ import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
-  Button,
   Input,
   Label,
   Select,
@@ -15,6 +14,7 @@ import {
   SelectValue,
   Textarea,
 } from "@relume_io/relume-ui";
+import { AnimatedButton } from "@/components/ui/animated-button";
 import { BiEnvelope, BiMap, BiPhone } from "react-icons/bi";
 import { contactSchema, type ContactFormData } from "@/lib/schemas/contact";
 import { submitContactForm } from "@/app/(site)/contact/actions";
@@ -252,9 +252,14 @@ export function ContactForm() {
 
           {/* Submit */}
           <div>
-            <Button type="submit" title="Send inquiry" disabled={isPending}>
+            <AnimatedButton
+              type="submit"
+              variant="primary"
+              withArrow={!isPending}
+              className={isPending ? "pointer-events-none opacity-70" : ""}
+            >
               {isPending ? "Sending..." : "Send inquiry"}
-            </Button>
+            </AnimatedButton>
           </div>
         </form>
       </div>

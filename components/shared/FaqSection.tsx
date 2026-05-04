@@ -5,11 +5,10 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-  Button,
 } from "@relume_io/relume-ui";
 import React from "react";
 import { RxPlus } from "react-icons/rx";
-import Link from "next/link";
+import { AnimatedButton } from "@/components/ui/animated-button";
 
 interface FaqItem {
   question: string;
@@ -99,11 +98,9 @@ export function FaqSection({
               Reach out directly and we&apos;ll answer within hours.
             </p>
             <div className="mt-6 md:mt-8">
-              <Link href="/contact">
-                <Button title="Contact" variant="secondary">
-                  Contact
-                </Button>
-              </Link>
+              <AnimatedButton href="/contact" variant="secondary">
+                Contact
+              </AnimatedButton>
             </div>
           </div>
         )}

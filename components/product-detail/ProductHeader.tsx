@@ -10,8 +10,8 @@ import {
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbSeparator,
-  Button,
 } from "@relume_io/relume-ui";
+import { AnimatedButton } from "@/components/ui/animated-button";
 import Image from "next/image";
 import Link from "next/link";
 import { Fragment } from "react";
@@ -91,20 +91,21 @@ export function ProductHeader({ product }: ProductHeaderProps) {
             )}
 
             <div className="mb-8 flex flex-col gap-y-4">
-              <Link href={`/contact?product=${product.slug}`}>
-                <Button title="Request a quote" className="w-full">
-                  Request a quote
-                </Button>
-              </Link>
-              <Link href="/contact">
-                <Button
-                  title="Contact sales"
-                  variant="secondary"
-                  className="w-full"
-                >
-                  Contact sales
-                </Button>
-              </Link>
+              <AnimatedButton
+                href={`/contact?product=${product.slug}`}
+                variant="primary"
+                withArrow
+                className="w-full"
+              >
+                Request a quote
+              </AnimatedButton>
+              <AnimatedButton
+                href="/contact"
+                variant="secondary"
+                className="w-full"
+              >
+                Contact sales
+              </AnimatedButton>
             </div>
             <p className="mb-8 text-center text-xs text-text-primary/60">
               Cold chain guaranteed &middot;{" "}

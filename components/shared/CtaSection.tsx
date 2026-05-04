@@ -1,8 +1,7 @@
 "use client";
 
-import { Button } from "@relume_io/relume-ui";
 import Image from "next/image";
-import Link from "next/link";
+import { AnimatedButton } from "@/components/ui/animated-button";
 
 interface CtaSectionProps {
   heading?: string;
@@ -51,27 +50,27 @@ export function CtaSection({
           {(primaryCta || secondaryCta) && (
             <div className="mt-6 flex flex-wrap items-center justify-center gap-4 md:mt-8">
               {primaryCta && (
-                <Link href={primaryCta.href}>
-                  <Button title={primaryCta.label}>{primaryCta.label}</Button>
-                </Link>
+                <AnimatedButton href={primaryCta.href} variant="primary" withArrow>
+                  {primaryCta.label}
+                </AnimatedButton>
               )}
               {secondaryCta && (
-                <Link href={secondaryCta.href}>
-                  <Button title={secondaryCta.label} variant="secondary">
-                    {secondaryCta.label}
-                  </Button>
-                </Link>
+                <AnimatedButton href={secondaryCta.href} variant="secondary">
+                  {secondaryCta.label}
+                </AnimatedButton>
               )}
             </div>
           )}
         </div>
-        <Image
-          src={image}
-          alt={heading}
-          width={1200}
-          height={800}
-          className="size-full object-cover"
-        />
+        <div className="group/img w-full overflow-hidden">
+          <Image
+            src={image}
+            alt={heading}
+            width={1200}
+            height={800}
+            className="size-full object-cover transition-transform duration-700 ease-out group-hover/img:scale-[1.02]"
+          />
+        </div>
       </div>
     </section>
   );

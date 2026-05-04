@@ -1,11 +1,12 @@
 "use client";
 
-import { Button, useMediaQuery } from "@relume_io/relume-ui";
+import { useMediaQuery } from "@relume_io/relume-ui";
 import { motion, AnimatePresence } from "framer-motion";
 import React, { useState } from "react";
 import { RxChevronDown, RxChevronRight } from "react-icons/rx";
 import Link from "next/link";
 import Image from "next/image";
+import { AnimatedButton } from "@/components/ui/animated-button";
 
 interface NavbarHook {
   toggleMobileMenu: () => void;
@@ -216,14 +217,14 @@ function DropdownContent({ onLinkClick }: { onLinkClick: () => void }) {
             <div className="grid auto-cols-fr grid-cols-1 grid-rows-[auto_auto] items-start gap-y-2 lg:grid-rows-[auto]">
               <Link
                 href="/blog"
-                className="flex auto-cols-fr grid-cols-[0.6fr_1fr] flex-col gap-x-6 py-2 md:grid"
+                className="group flex auto-cols-fr grid-cols-[0.6fr_1fr] flex-col gap-x-6 py-2 md:grid"
                 onClick={onLinkClick}
               >
-                <div className="relative w-full pt-[66.66%]">
+                <div className="relative w-full overflow-hidden pt-[66.66%]">
                   <Image
                     src="/images/sections/home-slider-01.webp"
                     alt="Cold chain logistics"
-                    className="absolute inset-0 size-full object-cover"
+                    className="absolute inset-0 size-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
                     fill
                     sizes="(max-width: 768px) 100vw, 300px"
                   />
@@ -235,28 +236,22 @@ function DropdownContent({ onLinkClick }: { onLinkClick: () => void }) {
                   <p className="text-sm">
                     How temperature control ensures quality
                   </p>
-                  <div className="mt-1.5">
-                    <Button
-                      title="Read more"
-                      variant="link"
-                      size="link"
-                      className="text-sm underline"
-                    >
-                      Read more
-                    </Button>
-                  </div>
+                  <span className="mt-1.5 inline-flex items-center gap-1 text-sm font-semibold underline-offset-4 transition-colors duration-200 group-hover:text-primary group-hover:underline">
+                    Read more
+                    <RxChevronRight className="size-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
+                  </span>
                 </div>
               </Link>
               <Link
                 href="/blog"
-                className="flex auto-cols-fr grid-cols-[0.6fr_1fr] flex-col gap-x-6 py-2 md:grid"
+                className="group flex auto-cols-fr grid-cols-[0.6fr_1fr] flex-col gap-x-6 py-2 md:grid"
                 onClick={onLinkClick}
               >
-                <div className="relative w-full pt-[66.66%]">
+                <div className="relative w-full overflow-hidden pt-[66.66%]">
                   <Image
                     src="/images/sections/home-slider-02.webp"
                     alt="Egyptian agriculture"
-                    className="absolute inset-0 size-full object-cover"
+                    className="absolute inset-0 size-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
                     fill
                     sizes="(max-width: 768px) 100vw, 300px"
                   />
@@ -268,30 +263,17 @@ function DropdownContent({ onLinkClick }: { onLinkClick: () => void }) {
                   <p className="text-sm">
                     Why the Nile Delta leads global production
                   </p>
-                  <div className="mt-1.5">
-                    <Button
-                      title="Read more"
-                      variant="link"
-                      size="link"
-                      className="text-sm underline"
-                    >
-                      Read more
-                    </Button>
-                  </div>
+                  <span className="mt-1.5 inline-flex items-center gap-1 text-sm font-semibold underline-offset-4 transition-colors duration-200 group-hover:text-primary group-hover:underline">
+                    Read more
+                    <RxChevronRight className="size-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
+                  </span>
                 </div>
               </Link>
             </div>
             <div className="flex items-center">
-              <Link href="/blog" onClick={onLinkClick}>
-                <Button
-                  title="View all articles"
-                  variant="link"
-                  size="link"
-                  iconRight={<RxChevronRight />}
-                >
-                  View all articles
-                </Button>
-              </Link>
+              <AnimatedButton href="/blog" variant="link" withArrow onClick={onLinkClick}>
+                View all articles
+              </AnimatedButton>
             </div>
           </div>
           <div className="absolute bottom-0 left-0 right-auto top-0 min-w-full bg-background-secondary lg:min-w-[100vw]" />
@@ -510,37 +492,44 @@ export function Navbar() {
 
             {/* Mobile CTA Buttons */}
             <div className="mt-6 flex w-full flex-col gap-y-4 pb-24">
-              <Link href="/contact" className="w-full" onClick={nav.closeMobileMenu}>
-                <Button
-                  className="w-full"
-                  title="Contact"
-                  variant="secondary"
-                  size="sm"
-                >
-                  Contact
-                </Button>
-              </Link>
-              <Link href="/contact?intent=quote" className="w-full" onClick={nav.closeMobileMenu}>
-                <Button className="w-full" title="Get a Quote" size="sm">
-                  Get a Quote
-                </Button>
-              </Link>
+              <AnimatedButton
+                href="/contact"
+                variant="secondary"
+                className="w-full"
+                onClick={nav.closeMobileMenu}
+              >
+                Contact
+              </AnimatedButton>
+              <AnimatedButton
+                href="/contact?intent=quote"
+                variant="primary"
+                withArrow
+                className="w-full"
+                onClick={nav.closeMobileMenu}
+              >
+                Get a Quote
+              </AnimatedButton>
             </div>
           </motion.div>
         </div>
 
         {/* Desktop CTA Buttons */}
         <div className="hidden lg:flex lg:flex-shrink-0 lg:gap-3">
-          <Link href="/contact">
-            <Button title="Contact" variant="secondary" size="sm" className="lg:text-sm">
-              Contact
-            </Button>
-          </Link>
-          <Link href="/contact?intent=quote">
-            <Button title="Get a Quote" size="sm" className="lg:text-sm">
-              Get a Quote
-            </Button>
-          </Link>
+          <AnimatedButton
+            href="/contact"
+            variant="secondary"
+            className="px-5 py-2.5 text-sm"
+          >
+            Contact
+          </AnimatedButton>
+          <AnimatedButton
+            href="/contact?intent=quote"
+            variant="primary"
+            withArrow
+            className="px-5 py-2.5 text-sm"
+          >
+            Get a Quote
+          </AnimatedButton>
         </div>
       </div>
     </section>

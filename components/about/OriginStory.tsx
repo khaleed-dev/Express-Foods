@@ -1,9 +1,8 @@
 "use client";
 
-import { Button } from "@relume_io/relume-ui";
 import Image from "next/image";
-import Link from "next/link";
 import { BiCheck } from "react-icons/bi";
+import { AnimatedButton } from "@/components/ui/animated-button";
 
 const highlights = [
   "Ethical sourcing from certified farms",
@@ -30,53 +29,32 @@ export function OriginStory() {
             </p>
             <ul className="grid grid-cols-1 gap-4 py-2">
               {highlights.map((item) => (
-                <li key={item} className="flex self-start">
-                  <div className="mr-4 flex-none self-start">
-                    <BiCheck className="size-6 text-background-alternative" />
+                <li key={item} className="group/item flex self-start">
+                  <div className="mr-4 flex size-6 flex-none items-center justify-center self-start rounded-full bg-background-alternative/10 transition-all duration-200 group-hover/item:scale-110 group-hover/item:bg-primary/15">
+                    <BiCheck className="size-5 text-background-alternative transition-colors duration-200 group-hover/item:text-primary" />
                   </div>
-                  <span>{item}</span>
+                  <span className="transition-colors duration-200 group-hover/item:text-foreground">
+                    {item}
+                  </span>
                 </li>
               ))}
             </ul>
             <div className="mt-6 flex flex-wrap items-center gap-4 md:mt-8">
-              <Link href="/products">
-                <Button title="Explore products" variant="secondary">
-                  Explore products
-                </Button>
-              </Link>
-              <Link href="/contact?intent=quote">
-                <Button
-                  title="Request a quote"
-                  variant="link"
-                  size="link"
-                  iconRight={
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="m9 18 6-6-6-6" />
-                    </svg>
-                  }
-                >
-                  Request a quote
-                </Button>
-              </Link>
+              <AnimatedButton href="/products" variant="secondary">
+                Explore products
+              </AnimatedButton>
+              <AnimatedButton href="/contact?intent=quote" variant="link" withArrow>
+                Request a quote
+              </AnimatedButton>
             </div>
           </div>
-          <div>
+          <div className="group/img w-full overflow-hidden">
             <Image
               src="/images/sections/about-origins.webp"
               alt="Egyptian farmland in the Nile Delta where Express Foods sources its produce"
               width={616}
               height={640}
-              className="w-full object-cover"
+              className="w-full object-cover transition-transform duration-700 ease-out group-hover/img:scale-105"
             />
           </div>
         </div>
