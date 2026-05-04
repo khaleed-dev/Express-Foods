@@ -384,7 +384,7 @@ export function Navbar() {
               href="/blog"
               className="block px-3 py-6 text-base"
             >
-              Blog
+              News
             </Link>
             <div
               onMouseEnter={nav.openOnDesktopDropdownMenu}
@@ -462,7 +462,7 @@ export function Navbar() {
               className="block py-3 text-md"
               onClick={nav.closeMobileMenu}
             >
-              Blog
+              News
             </Link>
             <div>
               <button

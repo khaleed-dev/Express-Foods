@@ -33,7 +33,7 @@ export function BlogPostHeader({ post }: BlogPostHeaderProps) {
             <BreadcrumbList>
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
-                  <Link href="/blog">Blog</Link>
+                  <Link href="/blog">News</Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />

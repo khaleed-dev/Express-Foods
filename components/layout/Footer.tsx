@@ -88,7 +88,7 @@ export function Footer() {
                 <Link href="/about">Sustainability</Link>
               </li>
               <li className="py-2 text-sm font-semibold">
-                <Link href="/blog">Blog</Link>
+                <Link href="/blog">News</Link>
               </li>
               <li className="py-2 text-sm font-semibold">
                 <Link href="/contact">Contact</Link>
