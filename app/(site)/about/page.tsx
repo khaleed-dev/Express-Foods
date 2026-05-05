@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/shared/PageHero";
 import { OriginStory } from "@/components/about/OriginStory";
+import { LegalCredentials } from "@/components/about/LegalCredentials";
 import { WhatSetsUsApart } from "@/components/about/WhatSetsUsApart";
 import { WhyBuyersTrustUs } from "@/components/about/WhyBuyersTrustUs";
 import { LogoPartners } from "@/components/shared/LogoPartners";
@@ -28,6 +29,7 @@ export default function AboutPage() {
           href: "/contact?intent=quote",
         }}
       />
+      <LegalCredentials />
       <OriginStory />
       <WhatSetsUsApart />
       <WhyBuyersTrustUs />

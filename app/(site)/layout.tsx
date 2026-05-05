@@ -3,6 +3,8 @@ import Script from "next/script";
 import { Montserrat, Merriweather, Source_Code_Pro } from "next/font/google";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { WhatsAppFloatingButton } from "@/components/shared/WhatsAppFloatingButton";
+import { company } from "@/lib/data/company";
 
 const plausibleDomain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
 
@@ -26,7 +28,7 @@ const sourceCodePro = Source_Code_Pro({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://expressfoods.com"),
+  metadataBase: new URL(company.url),
   title: {
     default: "Express Foods — Premium Egyptian Fruits & Vegetables for Global Markets",
     template: "%s | Express Foods",
@@ -49,6 +51,7 @@ export default function SiteLayout({
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
+        <WhatsAppFloatingButton />
         {plausibleDomain && (
           <Script
             defer

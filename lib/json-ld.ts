@@ -1,26 +1,28 @@
 import type { Product, BlogPost } from "@/lib/types";
+import { company } from "@/lib/data/company";
 
 export function getOrganizationJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Express Foods",
-    url: "https://expressfoods.com",
-    logo: "https://expressfoods.com/images/logos/logo-colored.svg",
+    name: company.name,
+    url: company.url,
+    logo: `${company.url}/images/logos/logo-colored.svg`,
     description:
       "Egypt-based B2B exporter of premium fresh and frozen fruits and vegetables",
     address: {
       "@type": "PostalAddress",
+      streetAddress: company.address.line1,
       addressLocality: "Cairo",
-      addressRegion: "Nile Delta",
       addressCountry: "EG",
     },
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "sales",
-      email: "info@expressfoods.com",
+      email: company.publicEmail,
+      telephone: company.phone.raw,
     },
-    sameAs: [],
+    sameAs: [company.socials.linkedin],
   };
 }
 
@@ -30,10 +32,10 @@ export function getProductJsonLd(product: Product) {
     "@type": "Product",
     name: product.name,
     description: product.description,
-    image: `https://expressfoods.com${product.image}`,
+    image: `${company.url}${product.image}`,
     brand: {
       "@type": "Brand",
-      name: "Express Foods",
+      name: company.name,
     },
     category: product.category,
     offers: {
@@ -42,7 +44,7 @@ export function getProductJsonLd(product: Product) {
       priceCurrency: "USD",
       seller: {
         "@type": "Organization",
-        name: "Express Foods",
+        name: company.name,
       },
     },
   };
@@ -54,7 +56,7 @@ export function getArticleJsonLd(post: BlogPost) {
     "@type": "Article",
     headline: post.title,
     description: post.excerpt,
-    image: `https://expressfoods.com${post.image}`,
+    image: `${company.url}${post.image}`,
     datePublished: post.publishedAt,
     author: {
       "@type": "Organization",
@@ -62,10 +64,10 @@ export function getArticleJsonLd(post: BlogPost) {
     },
     publisher: {
       "@type": "Organization",
-      name: "Express Foods",
+      name: company.name,
       logo: {
         "@type": "ImageObject",
-        url: "https://expressfoods.com/images/logos/logo-colored.svg",
+        url: `${company.url}/images/logos/logo-colored.svg`,
       },
     },
   };

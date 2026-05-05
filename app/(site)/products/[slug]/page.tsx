@@ -5,6 +5,7 @@ import { FaqSection } from "@/components/shared/FaqSection";
 import { CtaSection } from "@/components/shared/CtaSection";
 import { getAllProducts, getProductBySlug } from "@/lib/data/products";
 import { getProductJsonLd, getBreadcrumbJsonLd } from "@/lib/json-ld";
+import { company } from "@/lib/data/company";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -47,9 +48,9 @@ export default async function ProductDetailPage({ params }: Props) {
   }
 
   const breadcrumbItems = [
-    { name: "Home", url: "https://expressfoods.com" },
-    { name: "Products", url: "https://expressfoods.com/products" },
-    { name: product.name, url: `https://expressfoods.com/products/${product.slug}` },
+    { name: "Home", url: company.url },
+    { name: "Products", url: `${company.url}/products` },
+    { name: product.name, url: `${company.url}/products/${product.slug}` },
   ];
 
   return (
