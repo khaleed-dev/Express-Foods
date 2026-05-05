@@ -22,7 +22,11 @@ interface TabContentData {
   image: { src: string; alt: string };
 }
 
-const tabs: { trigger: TabTrigger[]; content: TabContentData[] } = {
+interface HeroTabsProps {
+  tabs?: { trigger: TabTrigger[]; content: TabContentData[] };
+}
+
+const defaultTabs: { trigger: TabTrigger[]; content: TabContentData[] } = {
   trigger: [
     { value: "tab-one", text: "Fresh citrus" },
     { value: "tab-two", text: "Year-round" },
@@ -131,7 +135,7 @@ function TabContent({ content }: { content: TabContentData }) {
   );
 }
 
-export function HeroTabs() {
+export function HeroTabs({ tabs = defaultTabs }: HeroTabsProps = {}) {
   const [activeTab, setActiveTab] = useState("tab-one");
   const [isPaused, setIsPaused] = useState(false);
   // Key that increments each time a new slide activates — used to restart the indicator CSS animation

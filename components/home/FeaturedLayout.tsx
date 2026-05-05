@@ -11,7 +11,14 @@ interface TabItem {
   image: { src: string; alt: string };
 }
 
-const tabItems: TabItem[] = [
+interface FeaturedLayoutProps {
+  tagline?: string;
+  heading?: string;
+  description?: string;
+  tabs?: TabItem[];
+}
+
+const defaultTabItems: TabItem[] = [
   {
     heading: "Year-round harvest",
     description:
@@ -100,7 +107,12 @@ function TabItemComponent({
   );
 }
 
-export function FeaturedLayout() {
+export function FeaturedLayout({
+  tagline = "Origin",
+  heading = "Egypt\u2019s climate works for you",
+  description = "Year-round harvest from the Nile Delta means consistent supply when you need it. Three to five days to European ports gives you fresher product, faster.",
+  tabs = defaultTabItems,
+}: FeaturedLayoutProps = {}) {
   const useActive = useRelume();
 
   return (
@@ -109,18 +121,14 @@ export function FeaturedLayout() {
         <div className="relative flex flex-col md:flex-row">
           <div className="w-full md:w-1/2 md:pr-6 lg:pr-10">
             <div className="mb-8 md:hidden">
-              <p className="mb-3 font-semibold md:mb-4">Origin</p>
+              <p className="mb-3 font-semibold md:mb-4">{tagline}</p>
               <h2 className="mb-5 text-5xl font-bold md:mb-6 md:text-4xl lg:text-5xl">
-                Egypt&apos;s climate works for you
+                {heading}
               </h2>
-              <p className="md:text-md">
-                Year-round harvest from the Nile Delta means consistent supply
-                when you need it. Three to five days to European ports gives you
-                fresher product, faster.
-              </p>
+              <p className="md:text-md">{description}</p>
             </div>
             <AnimatePresence initial={false}>
-              {tabItems.map((item, index) => (
+              {tabs.map((item, index) => (
                 <TabItemComponent
                   key={index}
                   tabItem={item}
@@ -132,19 +140,15 @@ export function FeaturedLayout() {
           </div>
           <div className="w-full md:w-1/2 md:pl-6 lg:pl-10">
             <div className="mb-8 hidden md:block">
-              <p className="mb-3 font-semibold md:mb-4">Origin</p>
+              <p className="mb-3 font-semibold md:mb-4">{tagline}</p>
               <h2 className="mb-5 text-5xl font-bold md:mb-6 md:text-4xl lg:text-5xl">
-                Egypt&apos;s climate works for you
+                {heading}
               </h2>
-              <p className="md:text-md">
-                Year-round harvest from the Nile Delta means consistent supply
-                when you need it. Three to five days to European ports gives you
-                fresher product, faster.
-              </p>
+              <p className="md:text-md">{description}</p>
             </div>
             <div className="static flex flex-col flex-wrap justify-stretch md:block">
               <div className="relative grid auto-cols-fr grid-cols-1 grid-rows-[auto_auto] items-start md:mb-0 md:items-stretch">
-                {tabItems.map((item, index) => (
+                {tabs.map((item, index) => (
                   <div
                     key={index}
                     onClick={useActive.setActiveTabSetter(index)}

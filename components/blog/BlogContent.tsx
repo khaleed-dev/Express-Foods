@@ -5,10 +5,32 @@ interface BlogContentProps {
   post: BlogPost;
 }
 
+/** Extract plain text paragraphs from Lexical JSON or a plain string */
+function extractParagraphs(content: unknown): string[] {
+  // Plain string (static data)
+  if (typeof content === "string") {
+    return content.split("\n\n").filter((p) => p.trim().length > 0);
+  }
+
+  // Lexical JSON (Payload richText)
+  if (content && typeof content === "object") {
+    const root = (content as Record<string, unknown>).root as
+      | { children?: { children?: { text?: string }[] }[] }
+      | undefined;
+    if (root?.children) {
+      return root.children
+        .map((node) =>
+          (node.children || []).map((child) => child.text || "").join(""),
+        )
+        .filter((text) => text.trim().length > 0);
+    }
+  }
+
+  return [];
+}
+
 export function BlogContent({ post }: BlogContentProps) {
-  const paragraphs = post.content
-    .split("\n\n")
-    .filter((p) => p.trim().length > 0);
+  const paragraphs = extractParagraphs(post.content);
 
   return (
     <section className="px-[5%] py-16 md:py-24 lg:py-28">

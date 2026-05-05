@@ -5,7 +5,14 @@ import Link from "next/link";
 import { RxChevronRight } from "react-icons/rx";
 import { AnimatedButton } from "@/components/ui/animated-button";
 
-const productCategories = [
+interface ProductRangeProps {
+  tagline?: string;
+  heading?: string;
+  description?: string;
+  categories?: { heading: string; description: string; href: string; image: { src: string; alt: string } }[];
+}
+
+const defaultCategories = [
   {
     heading: "Fresh citrus",
     description: "Oranges, mandarins, lemons. Peak season November through May.",
@@ -32,23 +39,27 @@ const productCategories = [
   },
 ];
 
-export function ProductRange() {
+export function ProductRange({
+  tagline = "Range",
+  heading = "What we grow and ship",
+  description = "Four product lines, year-round availability, certified quality. From the Nile Delta to your shelves.",
+  categories = defaultCategories,
+}: ProductRangeProps = {}) {
   return (
     <section id="product-range" className="px-[5%] py-16 md:py-24 lg:py-28">
       <div className="container">
         <div className="flex flex-col items-start">
           <div className="mx-auto mb-12 w-full max-w-lg items-start justify-between gap-5 md:mb-18 lg:mb-20">
-            <p className="mb-3 text-center font-semibold md:mb-4">Range</p>
+            <p className="mb-3 text-center font-semibold md:mb-4">{tagline}</p>
             <h2 className="mb-5 text-center text-5xl font-bold md:mb-6 md:text-4xl lg:text-5xl">
-              What we grow and ship
+              {heading}
             </h2>
             <p className="text-center md:text-md">
-              Four product lines, year-round availability, certified quality.
-              From the Nile Delta to your shelves.
+              {description}
             </p>
           </div>
           <div className="grid w-full grid-cols-1 items-start gap-y-12 md:grid-cols-2 md:gap-x-8 md:gap-y-16 lg:grid-cols-4">
-            {productCategories.map((category, index) => (
+            {categories.map((category, index) => (
               <Link
                 key={index}
                 href={category.href}

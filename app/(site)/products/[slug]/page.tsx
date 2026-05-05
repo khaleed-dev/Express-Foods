@@ -3,16 +3,18 @@ import { notFound } from "next/navigation";
 import { ProductHeader } from "@/components/product-detail/ProductHeader";
 import { FaqSection } from "@/components/shared/FaqSection";
 import { CtaSection } from "@/components/shared/CtaSection";
-import { getAllProducts, getProductBySlug } from "@/lib/data/products";
+import { getAllProducts, getProductBySlug } from "@/lib/payload";
 import { getProductJsonLd, getBreadcrumbJsonLd } from "@/lib/json-ld";
 import { company } from "@/lib/data/company";
+
+export const revalidate = 3600;
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
 
 export async function generateStaticParams() {
-  const products = getAllProducts();
+  const products = await getAllProducts();
   return products.map((product) => ({
     slug: product.slug,
   }));
@@ -20,7 +22,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const product = await getProductBySlug(slug);
 
   if (!product) {
     return {
@@ -41,7 +43,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ProductDetailPage({ params }: Props) {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const product = await getProductBySlug(slug);
 
   if (!product) {
     notFound();

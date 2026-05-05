@@ -3,7 +3,17 @@
 import Image from "next/image";
 import { AnimatedButton } from "@/components/ui/animated-button";
 
-const processSteps = [
+interface ProcessSectionProps {
+  tagline?: string;
+  heading?: string;
+  description?: string;
+  steps?: { heading: string; description: string }[];
+  featuredImage?: string;
+  featuredHeading?: string;
+  featuredDescription?: string;
+}
+
+const defaultSteps = [
   {
     heading: "We source from certified farms",
     description: "Only growers who meet our standards make the cut.",
@@ -22,22 +32,30 @@ const processSteps = [
   },
 ];
 
-export function ProcessSection() {
+export function ProcessSection({
+  tagline = "Process",
+  heading = "From soil to ship",
+  description = "Six steps. One standard. Every time.",
+  steps = defaultSteps,
+  featuredImage = "/images/sections/From soil to ship/From soil to ship section image.webp",
+  featuredHeading = "Hand-picked at the source",
+  featuredDescription = "Only produce selected by skilled hands at peak ripeness leaves our certified farms.",
+}: ProcessSectionProps = {}) {
   return (
     <section id="process" className="px-[5%] py-16 md:py-24 lg:py-28">
       <div className="container">
         <div className="rb-12 mb-12 md:mb-18 lg:mb-20">
           <div className="mx-auto max-w-lg text-center">
-            <p className="mb-3 font-semibold md:mb-4">Process</p>
+            <p className="mb-3 font-semibold md:mb-4">{tagline}</p>
             <h2 className="mb-5 text-5xl font-bold md:mb-6 md:text-4xl lg:text-5xl">
-              From soil to ship
+              {heading}
             </h2>
-            <p className="md:text-md">Six steps. One standard. Every time.</p>
+            <p className="md:text-md">{description}</p>
           </div>
         </div>
         <div className="grid grid-cols-1 gap-6 md:gap-8">
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:gap-8 lg:grid-cols-4">
-            {processSteps.map((step, index) => (
+            {steps.map((step, index) => (
               <div
                 key={index}
                 className="group/step flex flex-col border border-border-primary bg-background transition-all duration-300 ease-out hover:-translate-y-1 hover:border-primary/60 hover:shadow-xl hover:shadow-primary/10"
@@ -63,8 +81,8 @@ export function ProcessSection() {
             <div className="group/feature flex flex-col overflow-hidden border border-border-primary bg-background transition-all duration-300 ease-out hover:border-primary/60 hover:shadow-2xl hover:shadow-primary/10 sm:col-span-2 sm:col-start-1 sm:row-span-2 sm:row-start-3 lg:col-span-2 lg:col-start-3 lg:row-span-2 lg:row-start-1">
               <div className="relative flex aspect-[16/9] items-center justify-center overflow-hidden">
                 <Image
-                  src="/images/sections/From soil to ship/From soil to ship section image.webp"
-                  alt="Expert hands hand-picking fresh produce from the orchard"
+                  src={featuredImage}
+                  alt={featuredHeading}
                   fill
                   className="object-cover transition-transform duration-700 ease-out group-hover/feature:scale-105"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 50vw"
@@ -74,11 +92,10 @@ export function ProcessSection() {
                 <div>
                   <p className="mb-2 text-sm font-semibold text-primary/80">Five</p>
                   <h3 className="mb-5 text-4xl font-bold leading-[1.2] transition-colors duration-200 group-hover/feature:text-primary md:mb-6 md:text-5xl lg:text-6xl">
-                    Hand-picked at the source
+                    {featuredHeading}
                   </h3>
                   <p>
-                    Only produce selected by skilled hands at peak ripeness
-                    leaves our certified farms.
+                    {featuredDescription}
                   </p>
                 </div>
                 <div className="mt-6 flex flex-wrap items-center gap-4 md:mt-8">

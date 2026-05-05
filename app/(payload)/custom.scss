@@ -1,1 +1,10 @@
-/* Custom Payload admin styles — keep minimal */
+/* Express Foods — Payload Admin Brand Overrides */
+/* These build on top of Payload's default dark theme */
+
+/* Primary action buttons (Save, Create, Login) — brand green */
+:root {
+  --theme-success-500: #307b34;
+  --theme-success-600: #286a2c;
+  --theme-error-500: #c52c2a;
+  --theme-error-600: #a82322;
+}

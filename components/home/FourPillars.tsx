@@ -4,7 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { RxChevronRight } from "react-icons/rx";
 
-const pillars = [
+interface FourPillarsProps {
+  tagline?: string;
+  heading?: string;
+  description?: string;
+  pillars?: typeof defaultPillars;
+}
+
+const defaultPillars = [
   {
     label: "One",
     heading: "Certified quality from farm to port",
@@ -35,18 +42,23 @@ const pillars = [
   },
 ];
 
-export function FourPillars() {
+export function FourPillars({
+  tagline = "Why",
+  heading = "What sets us apart",
+  description = "Four pillars built on trust, science, and global standards.",
+  pillars = defaultPillars,
+}: FourPillarsProps = {}) {
   return (
     <section id="pillars" className="px-[5%] py-16 md:py-24 lg:py-28">
       <div className="container">
         <div className="mb-12 md:mb-18 lg:mb-20">
           <div className="mx-auto max-w-lg text-center">
-            <p className="mb-3 font-semibold md:mb-4">Why</p>
+            <p className="mb-3 font-semibold md:mb-4">{tagline}</p>
             <h2 className="mb-5 text-5xl font-bold md:mb-6 md:text-4xl lg:text-5xl">
-              What sets us apart
+              {heading}
             </h2>
             <p className="md:text-md">
-              Four pillars built on trust, science, and global standards.
+              {description}
             </p>
           </div>
         </div>

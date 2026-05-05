@@ -4,21 +4,23 @@ import { BlogPostHeader } from "@/components/blog/BlogPostHeader";
 import { BlogContent } from "@/components/blog/BlogContent";
 import { BlogPreview } from "@/components/shared/BlogPreview";
 import { CtaSection } from "@/components/shared/CtaSection";
-import { getAllBlogPosts, getBlogPostBySlug } from "@/lib/data/blog";
+import { getAllBlogPosts, getBlogPostBySlug } from "@/lib/payload";
 import { getArticleJsonLd } from "@/lib/json-ld";
+
+export const revalidate = 3600;
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
 
 export async function generateStaticParams() {
-  const posts = getAllBlogPosts();
+  const posts = await getAllBlogPosts();
   return posts.map((post) => ({ slug: post.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const post = getBlogPostBySlug(slug);
+  const post = await getBlogPostBySlug(slug);
 
   if (!post) {
     return { title: "Post not found" };
@@ -32,13 +34,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
-  const post = getBlogPostBySlug(slug);
+  const post = await getBlogPostBySlug(slug);
 
   if (!post) {
     notFound();
   }
 
-  const allPosts = getAllBlogPosts();
+  const allPosts = await getAllBlogPosts();
   const relatedPosts = allPosts
     .filter((p) => p.slug !== post.slug)
     .slice(0, 3)

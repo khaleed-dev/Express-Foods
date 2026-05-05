@@ -2,14 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { RxChevronRight } from "react-icons/rx";
 import type { Category } from "@/lib/types";
-import { getProductsByCategory } from "@/lib/data/products";
 
 interface CategoryCardProps {
   category: Category;
 }
 
 export function CategoryCard({ category }: CategoryCardProps) {
-  const productCount = getProductsByCategory(category.slug).length;
+  const productCount = category.productCount ?? 0;
   const typeLabel = category.slug === "iqf-frozen" ? "Frozen" : "Fresh";
 
   return (

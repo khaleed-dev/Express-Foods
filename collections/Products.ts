@@ -1,13 +1,24 @@
 import type { CollectionConfig } from "payload";
+import { revalidatePath } from "next/cache";
 
 export const Products: CollectionConfig = {
   slug: "products",
   admin: {
     useAsTitle: "name",
     defaultColumns: ["name", "category", "season", "updatedAt"],
+    group: "Products",
+    description: "Manage your product catalog",
   },
   access: {
     read: () => true,
+  },
+  hooks: {
+    afterChange: [
+      ({ doc }) => {
+        revalidatePath("/products", "page");
+        if (doc.slug) revalidatePath(`/products/${doc.slug}`, "page");
+      },
+    ],
   },
   fields: [
     {
@@ -26,14 +37,12 @@ export const Products: CollectionConfig = {
     },
     {
       name: "category",
-      type: "select",
+      type: "relationship",
+      relationTo: "categories",
       required: true,
-      options: [
-        { label: "Citrus", value: "citrus" },
-        { label: "Fresh Fruits", value: "fresh-fruits" },
-        { label: "Vegetables", value: "vegetables" },
-        { label: "IQF Frozen", value: "iqf-frozen" },
-      ],
+      admin: {
+        position: "sidebar",
+      },
     },
     {
       name: "tagline",

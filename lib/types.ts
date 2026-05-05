@@ -34,7 +34,7 @@ export interface BlogPost {
     role: string;
     avatar?: string;
   };
-  content: string;
+  content: string | Record<string, unknown>;
 }
 
 export interface Category {

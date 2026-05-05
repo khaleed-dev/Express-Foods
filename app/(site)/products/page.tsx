@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/shared/PageHero";
 import { CtaSection } from "@/components/shared/CtaSection";
 import { CategoryCard } from "@/components/products/CategoryCard";
-import { getCategories } from "@/lib/data/categories";
+import { getCategories } from "@/lib/payload";
+
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Our Products",
@@ -10,8 +12,8 @@ export const metadata: Metadata = {
     "Explore Express Foods' range of premium fresh and frozen Egyptian fruits and vegetables.",
 };
 
-export default function ProductsPage() {
-  const categories = getCategories();
+export default async function ProductsPage() {
+  const categories = await getCategories();
 
   return (
     <>

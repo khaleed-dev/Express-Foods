@@ -2,11 +2,9 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/shared/PageHero";
 import { CtaSection } from "@/components/shared/CtaSection";
 import { ProductGrid } from "@/components/products/ProductGrid";
-import { getProductsByCategory } from "@/lib/data/products";
-import { getCategoryBySlug } from "@/lib/data/categories";
+import { getProductsByCategory, getCategoryBySlug } from "@/lib/payload";
 
-const category = getCategoryBySlug("fresh-fruits")!;
-const products = getProductsByCategory("fresh-fruits");
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Fresh Fruits",
@@ -14,14 +12,19 @@ export const metadata: Metadata = {
     "Premium Egyptian fresh fruits — mangoes, strawberries, grapes, pomegranates, and more.",
 };
 
-export default function FreshFruitsPage() {
+export default async function FreshFruitsPage() {
+  const [category, products] = await Promise.all([
+    getCategoryBySlug("fresh-fruits"),
+    getProductsByCategory("fresh-fruits"),
+  ]);
+
   return (
     <>
       <PageHero
         tagline="Fresh Fruits"
         heading="Fruits that travel well"
         description="Strawberries, mangoes, pomegranates, grapes, dates, and melons — sun-ripened in Egypt and export-ready."
-        backgroundImage={category.heroImage}
+        backgroundImage={category?.heroImage || "/images/products/Hero-Fresh-Fruits.webp"}
         primaryCta={{ label: "Request a quote", href: "/contact?intent=quote" }}
       />
       <ProductGrid products={products} />

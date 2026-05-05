@@ -1,13 +1,24 @@
 import type { CollectionConfig } from "payload";
+import { revalidatePath } from "next/cache";
 
 export const BlogPosts: CollectionConfig = {
   slug: "blog-posts",
   admin: {
     useAsTitle: "title",
     defaultColumns: ["title", "category", "status", "publishedAt"],
+    group: "Content",
+    description: "Create and publish blog articles",
   },
   access: {
     read: () => true,
+  },
+  hooks: {
+    afterChange: [
+      ({ doc }) => {
+        revalidatePath("/blog", "page");
+        if (doc.slug) revalidatePath(`/blog/${doc.slug}`, "page");
+      },
+    ],
   },
   fields: [
     {
