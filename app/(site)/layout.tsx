@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { Montserrat, Merriweather, Source_Code_Pro } from "next/font/google";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppFloatingButton } from "@/components/shared/WhatsAppFloatingButton";
 import { company } from "@/lib/data/company";
-
-const plausibleDomain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -52,14 +49,6 @@ export default function SiteLayout({
         <main className="flex-1">{children}</main>
         <Footer />
         <WhatsAppFloatingButton />
-        {plausibleDomain && (
-          <Script
-            defer
-            data-domain={plausibleDomain}
-            src="https://plausible.io/js/script.js"
-            strategy="afterInteractive"
-          />
-        )}
       </body>
     </html>
   );

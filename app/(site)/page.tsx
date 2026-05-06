@@ -17,24 +17,14 @@ export const revalidate = 3600;
 
 export default async function HomePage() {
   const page = await getPageBySlug("home");
+  const hasPayloadLayout = !!(page?.layout && page.layout.length > 0);
+  const layoutHasHero = hasPayloadLayout
+    ? page!.layout!.some(
+        (b: { blockType?: string }) =>
+          b.blockType === "heroTabsBlock" || b.blockType === "heroBlock",
+      )
+    : false;
 
-  // If a "home" page exists in Payload with blocks, render those
-  if (page?.layout && page.layout.length > 0) {
-    return (
-      <>
-        <script
-          type="application/ld+json"
-          suppressHydrationWarning
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(getOrganizationJsonLd()),
-          }}
-        />
-        <RenderBlocks blocks={page.layout} />
-      </>
-    );
-  }
-
-  // Fallback: render hardcoded components (defaults)
   return (
     <>
       <script
@@ -44,17 +34,26 @@ export default async function HomePage() {
           __html: JSON.stringify(getOrganizationJsonLd()),
         }}
       />
-      <HeroTabs />
-      <StorySection />
-      <FourPillars />
-      <ProductRange />
-      <FeaturedLayout />
-      <LogoPartners />
-      <ProcessSection />
-      <GlobalReach />
-      <Testimonials />
-      <BlogPreview />
-      <CtaSection />
+      {hasPayloadLayout ? (
+        <>
+          {!layoutHasHero && <HeroTabs />}
+          <RenderBlocks blocks={page!.layout!} />
+        </>
+      ) : (
+        <>
+          <HeroTabs />
+          <StorySection />
+          <FourPillars />
+          <ProductRange />
+          <FeaturedLayout />
+          <LogoPartners />
+          <ProcessSection />
+          <GlobalReach />
+          <Testimonials />
+          <BlogPreview />
+          <CtaSection />
+        </>
+      )}
     </>
   );
 }

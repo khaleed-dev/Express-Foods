@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://expressfoods.com
+Host: https://expressfoodsco.com
 
 # Sitemaps
-Sitemap: https://expressfoods.com/sitemap.xml
+Sitemap: https://expressfoodsco.com/sitemap.xml

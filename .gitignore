@@ -44,6 +44,9 @@ next-env.d.ts
 # payload
 /payload-types.ts
 
+# payload media (stored in R2 in production; local copies are dev-only artifacts)
+/media
+
 # generated sitemaps (regenerated on build)
 /public/sitemap*.xml
 /public/robots.txt
