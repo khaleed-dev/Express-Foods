@@ -55,16 +55,11 @@ export default buildConfig({
     livePreview: {
       url: ({ data, collectionConfig }) => {
         const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:3000";
-        if (collectionConfig?.slug === "pages") {
-          const slug = data?.slug as string;
-          return `${baseUrl}/${slug === "home" ? "" : slug}`;
-        }
         if (collectionConfig?.slug === "products") return `${baseUrl}/products/${data?.slug}`;
         if (collectionConfig?.slug === "blog-posts") return `${baseUrl}/blog/${data?.slug}`;
         return baseUrl;
       },
-      collections: ["pages", "products", "blog-posts"],
-      globals: ["site-settings"],
+      collections: ["products", "blog-posts"],
     },
   },
   sharp,

@@ -21,6 +21,11 @@ export async function getAllProducts(): Promise<Product[]> {
 }
 
 export async function getProductBySlug(slug: string): Promise<Product | null> {
+  const doc = await getRawProductBySlug(slug);
+  return doc ? mapProduct(doc) : null;
+}
+
+export async function getRawProductBySlug(slug: string) {
   const payload = await getPayloadClient();
   const result = await payload.find({
     collection: "products",
@@ -28,8 +33,7 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
     depth: 2,
     limit: 1,
   });
-  const doc = result.docs[0];
-  return doc ? mapProduct(doc) : null;
+  return result.docs[0] ?? null;
 }
 
 export async function getProductsByCategory(
@@ -115,6 +119,11 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
 export async function getBlogPostBySlug(
   slug: string,
 ): Promise<BlogPost | null> {
+  const doc = await getRawBlogPostBySlug(slug);
+  return doc ? mapBlogPost(doc) : null;
+}
+
+export async function getRawBlogPostBySlug(slug: string) {
   const payload = await getPayloadClient();
   const result = await payload.find({
     collection: "blog-posts",
@@ -122,8 +131,7 @@ export async function getBlogPostBySlug(
     depth: 1,
     limit: 1,
   });
-  const doc = result.docs[0];
-  return doc ? mapBlogPost(doc) : null;
+  return result.docs[0] ?? null;
 }
 
 // ── Site Settings ──

@@ -1,13 +1,18 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { BlogPostHeader } from "@/components/blog/BlogPostHeader";
-import { BlogContent } from "@/components/blog/BlogContent";
-import { BlogPreview } from "@/components/shared/BlogPreview";
-import { CtaSection } from "@/components/shared/CtaSection";
-import { getAllBlogPosts, getBlogPostBySlug } from "@/lib/payload";
+import { BlogPostLive } from "@/components/live-preview/BlogPostLive";
+import {
+  getAllBlogPosts,
+  getBlogPostBySlug,
+  getRawBlogPostBySlug,
+} from "@/lib/payload";
+import { mapBlogPost } from "@/lib/payload-mappers";
 import { getArticleJsonLd } from "@/lib/json-ld";
 
 export const revalidate = 3600;
+
+const SERVER_URL =
+  process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:3000";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -34,12 +39,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
-  const post = await getBlogPostBySlug(slug);
+  const doc = await getRawBlogPostBySlug(slug);
 
-  if (!post) {
+  if (!doc) {
     notFound();
   }
 
+  const post = mapBlogPost(doc);
   const allPosts = await getAllBlogPosts();
   const relatedPosts = allPosts
     .filter((p) => p.slug !== post.slug)
@@ -62,15 +68,11 @@ export default async function BlogPostPage({ params }: Props) {
           __html: JSON.stringify(getArticleJsonLd(post)),
         }}
       />
-      <BlogPostHeader post={post} />
-      <BlogContent post={post} />
-      <BlogPreview
-        tagline="Related"
-        heading="More from the field"
-        description="Continue reading insights on sourcing, quality, and market trends."
-        posts={relatedPosts}
+      <BlogPostLive
+        initialDoc={doc as Record<string, unknown>}
+        relatedPosts={relatedPosts}
+        serverURL={SERVER_URL}
       />
-      <CtaSection />
     </>
   );
 }
